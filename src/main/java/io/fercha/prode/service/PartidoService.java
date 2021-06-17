@@ -17,4 +17,8 @@ public class PartidoService {
     public List<Partido> getPartidos(FaseEnum fase){
         return partidoRepository.findByFase(fase);
     }
+
+    public void guardar(Partido partido){
+        partidoRepository.save(partido);
+    }
 }

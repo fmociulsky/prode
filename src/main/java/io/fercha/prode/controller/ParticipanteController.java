@@ -50,7 +50,7 @@ public class ParticipanteController {
 
     @GetMapping("")
     public String listar(Model model){
-        List<Participante> participantes = participanteService.getParticipantes();
+        List<Participante> participantes = participanteService.listar();
         model.addAttribute("participantes", participantes);
         return "participanteList";
     }

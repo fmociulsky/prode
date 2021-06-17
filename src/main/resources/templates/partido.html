@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8">
+    <title>Participante</title>
+
+    <!-- Bootstrap -->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+</head>
+<br>
+
+<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+    PARTIDO <span class="caret"></span>
+</a>
+</br>
+<form th:action="@{/partido/guardar}" method="post" th:object="${partido}">
+
+    <input type="hidden" name="id" id="id" th:field="*{id}">
+    <label for="local">Local</label>
+    <input type="text" name="local" id="local" th:field="*{partido.local.nombre}">
+    <!--/br>
+    <label for="visitante">Visitante</label>
+    <input type="text" name="visitante" id="visitante" th:field="*{partido.visitante.nombre}">
+    </br>
+    <input type="submit" name="guardar" value="Guardar" /-->
+</form>
+
+</body>
+</html>

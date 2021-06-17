@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>PARTIDOS</title>
+
+    <!-- Bootstrap -->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+<ul class="nav nav-pills">
+    <li role="presentation" class="dropdown"><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Home.php">POSICIONES</a></li>
+    <li role="presentation" class="active">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            RESULTADOS <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=0">FECHA 1</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=16">FECHA 2</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=32">FECHA 3</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=48">FECHA 4</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=64">FECHA 5</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=80">FECHA 6</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=96">OCTAVOS</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/ResultadosCuartos.php?desde=112">CUARTOS</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/ResultadosSemis.php?desde=120">SEMIS</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/ResultadosFinal.php?desde=124">FINAL</a></li>
+            <!--<li role="separator" class="divider"></li>-->
+            <!--<li><a href="#">Separated link</a></li>-->
+        </ul>
+    </li>
+    <li role="presentation" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            PRONOSTICOS <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosEmma.php">EMMA</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosFer.php">FER</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosLechu.php">FEDE</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosAldo.php">ALDO</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosMosca.php">MOSCA</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosSeba.php">SEBA</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosGenerales.php">GENERALES</a></li>
+        </ul>
+    </li>
+</ul>
+
+<h1>Resultados de Partidos Fecha
+    <!--?php
+				if(isset($_GET['desde'])){
+					$desde = $_GET['desde'];
+				}else{
+					$desde = 0;
+				}
+				$desde = ($desde / 16) + 1;
+				if($desde == 7){
+					$desde = "OCTAVOS";
+				}
+
+				if($desde == 8){
+					$desde = "CUARTOS";
+				}
+
+				if($desde == 9){
+					$desde = "SEMIS";
+				}
+
+				if($desde == 10){
+					$desde = "FINAL";
+				}
+
+				echo $desde;
+		?-->
+</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Nro</th>
+        <th></th>
+        <th>Local</th>
+        <th style="width:150px">Goles Local</th>
+        <th style="width:150px">Goles Visitante</th>
+        <th>Visitante</th>
+        <th></th>
+        <th>Fecha</th>
+        <th></th>
+    </tr>
+    </thead>
+    <!--?php
+				$hoy = date('Y-m-d');
+				if(isset($_GET['desde'])){
+					$desde = $_GET['desde'];
+				}else{
+					$desde = 0;
+				}
+
+				$registrosPartidos=mysqli_query($conexion,"select idPartido, idLocal, idVisitante, golesLocal, golesVisitante, fecha from partidos LIMIT ".$desde.", 16") or
+						die("Problemas en el select:".mysqli_error($conexion));
+				$i = 1;
+				while ($reg=mysqli_fetch_array($registrosPartidos))	{
+
+					echo "<tr>";
+    echo "<td>". $i."</td>";
+    $registrosLocal=mysqli_query($conexion,"select  nombre from equipos where id=".$reg['idLocal']) or
+    die("Problemas en el select:".mysqli_error($conexion));
+    while ($regLocal=mysqli_fetch_array($registrosLocal))	{
+    ?-->
+    <td><img src="/imagenes/equipos/<?php  echo $reg['idLocal']	?>.png" style="width:25px;height:25px;"></td>
+    <!--?php
+						echo "<td>". $regLocal['nombre']."</td>";
+    }
+    ?-->
+    <td style='padding-left: 75px;'><?php  echo $reg['golesLocal']?></td>
+    <td style='padding-left: 75px;'><?php  echo $reg['golesVisitante']?></td>
+    <!--?php
+					$registrosVisitante=mysqli_query($conexion,"select  nombre from equipos where id=".$reg['idVisitante']) or
+					die("Problemas en el select:".mysqli_error($conexion));
+					while ($regVisi=mysqli_fetch_array($registrosVisitante))	{
+						echo "<td>". $regVisi['nombre']."</td>";
+    }
+    ?-->
+    <td><img src="/imagenes/equipos/<?php  echo $reg['idVisitante']	?>.png" style="width:25px;height:25px;"></td>
+    <!--?php
+					echo "<td style='padding-left: 40px;padding-right: 40px' >". date("d/m/Y", strtotime($reg['fecha']))."</td>";
+    $date = date('Y-m-j');
+    $manana = strtotime ( '+1 hour' , strtotime ( $date ) ) ;
+    $manana = date ( 'Y-m-j' , $manana );
+    if(strtotime($reg['fecha']) <=  strtotime($manana)){
+
+    ?-->
+    <!--td><input type="button" class="btn btn-primary btn-sm" value="Ver Pronosticos"
+               onclick=window.open("PronosticosPorPartido.php?partido=<!?php echo $reg['idPartido']?>","","width=600");
+        ?php
+					}
+						echo "<tr>";
+        $i++;
+        }
+        ?-->
+</table>
+</body>
+</html>

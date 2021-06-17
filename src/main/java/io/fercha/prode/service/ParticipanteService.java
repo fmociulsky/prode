@@ -17,13 +17,13 @@ public class ParticipanteService {
     ParticipanteRepository participanteRepository;
 
     @Transactional(readOnly = true)
-    public List<Participante> getParticipantes(){
+    public List<Participante> listar(){
         return participanteRepository.findAll();
     }
 
     @Transactional
-    public Participante guardar(Participante participante) {
-        return participanteRepository.save(participante);
+    public void guardar(Participante participante) {
+        participanteRepository.save(participante);
     }
     @Nullable
     public Participante buscarPorId(Long id) {

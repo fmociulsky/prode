@@ -26,7 +26,7 @@ public class ProdeController {
 
     @GetMapping("/")
     public String home(Model model){
-        final List<Participante> participantes = participanteService.getParticipantes();
+        final List<Participante> participantes = participanteService.listar();
         model.addAttribute("participantes", participantes);
         return "index";
     }

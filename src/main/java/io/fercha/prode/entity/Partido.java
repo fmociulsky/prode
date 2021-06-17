@@ -5,13 +5,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.io.Serializable;
 import java.util.Date;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-public class Partido {
+public class Partido implements Serializable {
 
+    private static final long serialVersionUID = -3209156863483399085L;
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
@@ -23,6 +25,16 @@ public class Partido {
     private int golesVisitante;
     private Date fecha;
     private FaseEnum fase;
+
+    public Partido(Long id, Equipo local, Equipo visitante, int golesLocal, int golesVisitante, Date fecha, FaseEnum fase) {
+        this.id = id;
+        this.local = local;
+        this.visitante = visitante;
+        this.golesLocal = golesLocal;
+        this.golesVisitante = golesVisitante;
+        this.fecha = fecha;
+        this.fase = fase;
+    }
 
     public Partido() {
     }
