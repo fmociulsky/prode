@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>PRODE CHAMPIONS 2019/2020</title>
+
+    <!-- Bootstrap -->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+    <!--?php
+		include "./conexion.php";
+
+		$registros=mysqli_query($conexion,"select nombre, apellido, puntos, id from usuarios order by puntos desc") or
+										die("Problemas en el select:".mysqli_error($conexion));
+	?-->
+</head>
+<body>
+
+
+<ul class="nav nav-pills">
+    <li role="presentation" class="active"><a href="https://prodechampions2018.000webhostapp.com/Pantallas/default.php">POSICIONES</a></li>
+    <li role="presentation" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            RESULTADOS <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=0">FECHA 1</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=16">FECHA 2</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=32">FECHA 3</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=48">FECHA 4</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=64">FECHA 5</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=80">FECHA 6</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=96">OCTAVOS</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/ResultadosCuartos.php?desde=112">CUARTOS</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/ResultadosSemis.php?desde=120">SEMIS</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/ResultadosFinal.php?desde=124">FINAL</a></li>
+            <!--<li role="separator" class="divider"></li>-->
+            <!--<li><a href="#">Separated link</a></li>-->
+        </ul>
+    </li>
+    <li role="presentation" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            PRONOSTICOS <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosEmma.php">EMMA</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosFer.php">FER</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosLechu.php">FEDE</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosAldo.php">ALDO</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosMosca.php">MOSCA</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosSeba.php">SEBA</a></li>
+            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosGenerales.php">GENERALES</a></li>
+            <!--<li role="separator" class="divider"></li>-->
+            <!--<li><a href="#">Separated link</a></li>-->
+        </ul>
+    </li>
+</ul>
+
+<h1>POSICIONES</h1>
+<table class="table table-condensed table-bordered">
+    <thead>
+    <tr>
+        <th>Posicion</th>
+        <th>Caripela</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Puntos</th>
+        <th>Detalle</th>
+    </tr>
+    </thead>
+
+    <tr th:each="participante, iStat: ${participantes}">
+        <td th:text="${iStat.index}" />
+        <td />
+        <td th:text="${participante.nombre}" />
+        <td th:text="${participante.apellido}" />
+        <td/>
+        <td/>
+    </tr>
+    <!--?php
+			$i = 1;
+			while ($reg=mysqli_fetch_array($registros))	{
+		?>
+    <tr>
+        <td><?php  echo $i					?></td>
+        <td><img src="https://prodechampions2018.000webhostapp.com/Pantallas/imagenes/<?php  echo $reg['id']	?>.jpg" style="width:50px;height:50px;" class="img-thumbnail"></td>
+        <td><?php  echo $reg['nombre']	?></td>
+        <td><?php  echo $reg['apellido']?></td>
+
+        <td>
+            <?php
+						$registrosPuntos=mysqli_query($conexion,"select puntos from pronosticos where idUsuario = ".$reg['id']) or
+							die("Problemas en el select:".mysqli_error($conexion));
+						$puntos = 0;
+						while ($regPtos=mysqli_fetch_array($registrosPuntos))	{
+								$puntos = $puntos + $regPtos['puntos'];
+						}
+						echo $puntos;
+					?>
+        </td>
+        <td>
+            <input type="button" class="btn btn-primary btn-sm" value="Detalle"
+                   onclick=window.open("DetallePorFecha.php?usuario=<?php echo $reg['id']?>","","width=600");
+        </td>
+    </tr>
+    <?php
+				$i++;
+			}
+		?-->
+</table>
+
+</body>
+</html>
