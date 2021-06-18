@@ -3,6 +3,8 @@ package io.fercha.prode.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.validation.constraints.NotEmpty;
 import java.io.File;
 import java.io.Serializable;
 
@@ -16,12 +18,15 @@ public class Participante implements Serializable {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+    @NotEmpty
     private String nombre;
+    @NotEmpty
     private String apellido;
     private String email;
-    private String foto;
+    @Lob
+    private byte[] foto;
 
-    public Participante(String nombre, String apellido, String email, String foto) {
+    public Participante(String nombre, String apellido, String email, byte[] foto) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -63,11 +68,11 @@ public class Participante implements Serializable {
         this.email = email;
     }
 
-    public String getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
 }

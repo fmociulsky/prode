@@ -13,26 +13,23 @@
     <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
 </head>
-<br>
 
-<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-    RESULTADOS <span class="caret"></span>
-</a>
-</br>
 <form th:action="@{/participante/guardar}" method="post" th:object="${participante}">
 
     <input type="hidden" name="id" id="id" th:field="*{id}">
     <label for="nombre">Nombre</label>
     <input type="text" name="nombre" id="nombre" th:field="*{nombre}">
+    <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error nombre</span>
     </br>
     <label for="apellido">Apellido</label>
     <input type="text" name="apellido" id="apellido" th:field="*{apellido}">
+    <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error apellido</span>
     </br>
     <label for="email">Email</label>
     <input type="email" name="email" id="email" th:field="*{email}">
     </br>
     <label>Foto: </label>
-    <input type="file" name="image" accept="image/png, image/jpeg" />
+    <input type="file" name="foto" accept="image/png, image/jpeg" />
     </br>
     <input type="submit" name="guardar" value="Guardar" />
 </form>

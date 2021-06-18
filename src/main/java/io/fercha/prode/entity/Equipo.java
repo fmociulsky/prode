@@ -1,8 +1,11 @@
 package io.fercha.prode.entity;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
 
@@ -15,14 +18,16 @@ public class Equipo implements Serializable {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
+    @NotEmpty
     private String nombre;
 
-    public Equipo() {
-    }
-
-    public Equipo(Long id, String nombre) {
+    public Equipo(Long id, @NotEmpty String nombre) {
         this.id = id;
         this.nombre = nombre;
+    }
+
+    public Equipo() {
     }
 
     public Long getId() {

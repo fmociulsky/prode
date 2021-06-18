@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <ul class="nav nav-pills" th:fragment="menu">
+        <li role="presentation" class="active"><a th:href="@{/}">POSICIONES</a></li>
+        <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                ADMIN <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a th:href="@{/equipo}" th:text="Equipos"/></li>
+                <li><a th:href="@{/participante}" th:text="Participantes"/></li>
+                <li><a th:href="@{/partido}" th:text="Partidos"/></li>
+
+            </ul>
+        </li>
+        <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                RESULTADOS <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=0">FECHA 1</a></li>
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=16">FECHA 2</a></li>
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=32">FECHA 3</a></li>
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=48">FECHA 4</a></li>
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=64">FECHA 5</a></li>
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=80">FECHA 6</a></li>
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=96">OCTAVOS</a></li>
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/ResultadosCuartos.php?desde=112">CUARTOS</a></li>
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/ResultadosSemis.php?desde=120">SEMIS</a></li>
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/ResultadosFinal.php?desde=124">FINAL</a></li>
+                <!--<li role="separator" class="divider"></li>-->
+                <!--<li><a href="#">Separated link</a></li>-->
+            </ul>
+        </li>
+        <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                PRONOSTICOS <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosEmma.php">EMMA</a></li>
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosFer.php">FER</a></li>
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosLechu.php">FEDE</a></li>
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosAldo.php">ALDO</a></li>
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosMosca.php">MOSCA</a></li>
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosSeba.php">SEBA</a></li>
+                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosGenerales.php">GENERALES</a></li>
+                <!--<li role="separator" class="divider"></li>-->
+                <!--<li><a href="#">Separated link</a></li>-->
+            </ul>
+        </li>
+    </ul>
+
+</body>
+</html>

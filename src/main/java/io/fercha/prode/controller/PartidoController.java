@@ -1,7 +1,9 @@
 package io.fercha.prode.controller;
 
+import io.fercha.prode.entity.Equipo;
 import io.fercha.prode.entity.FaseEnum;
 import io.fercha.prode.entity.Partido;
+import io.fercha.prode.service.EquipoService;
 import io.fercha.prode.service.PartidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class PartidoController {
     @Autowired
     PartidoService partidoService;
 
+    @Autowired
+    EquipoService equipoService;
+
     @GetMapping("")
     public String listar(@RequestParam FaseEnum faseEnum, Model model){
         List<Partido> partidos = partidoService.getPartidos(faseEnum);
@@ -29,6 +34,8 @@ public class PartidoController {
 
     @GetMapping("/nuevoPartido")
     public String agregarPartido(Partido partido, Model model){
+        final List<Equipo> equipos = equipoService.listar();
+        model.addAttribute("equipos", equipos);
         return "partido";
     }
 

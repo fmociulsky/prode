@@ -5,13 +5,12 @@
     <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8">
     <title>Participante</title>
 
-    <!-- Bootstrap -->
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <br>
 
@@ -23,7 +22,23 @@
 
     <input type="hidden" name="id" id="id" th:field="*{id}">
     <label for="local">Local</label>
-    <input type="text" name="local" id="local" th:field="*{partido.local.nombre}">
+    <select class="form-control" th:field="*{local}" name="local"
+            id="local">
+        <option value="" selected>Seleccionar Equipo</option>
+        <option th:each="equipo : ${equipos}" th:value="${equipo.id}"
+                th:text="${equipo.nombre}"
+                >
+        </option>
+    </select>
+    <label for="visitante">Visitante</label>
+    <select class="form-control" th:field="*{local}" name="visitante"
+            id="visitante">
+        <option value="" selected>Seleccionar Equipo</option>
+        <option th:each="equipo : ${equipos}" th:value="${equipo.id}"
+                th:text="${equipo.nombre}"
+        >
+        </option>
+    </select>
     <!--/br>
     <label for="visitante">Visitante</label>
     <input type="text" name="visitante" id="visitante" th:field="*{partido.visitante.nombre}">

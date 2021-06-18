@@ -1,26 +1,18 @@
 package io.fercha.prode.controller;
 
-import io.fercha.prode.FileUploadUtil;
 import io.fercha.prode.entity.Participante;
 import io.fercha.prode.service.ParticipanteService;
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
+import javax.validation.Valid;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 @Controller
@@ -36,7 +28,9 @@ public class ParticipanteController {
     }
 
     @PostMapping("/guardar")
-    public String guardar(Participante participante, @RequestParam("image") byte[] fileByte) throws IOException {
+    public String guardar(@Valid Participante participante, Errors errors, @RequestParam("foto") byte[] fileByte) throws IOException {
+        if(errors.hasErrors()) return "participante";
+        participante.setFoto(fileByte);
         participanteService.guardar(participante);
         return "redirect:/participante";
     }
@@ -50,7 +44,7 @@ public class ParticipanteController {
 
     @GetMapping("")
     public String listar(Model model){
-        List<Participante> participantes = participanteService.listar();
+        final List<Participante> participantes = participanteService.listar();
         model.addAttribute("participantes", participantes);
         return "participanteList";
     }

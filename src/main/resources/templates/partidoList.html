@@ -11,52 +11,16 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>PARTIDOS</title>
 
-    <!-- Bootstrap -->
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-<ul class="nav nav-pills">
-    <li role="presentation" class="dropdown"><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Home.php">POSICIONES</a></li>
-    <li role="presentation" class="active">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            RESULTADOS <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=0">FECHA 1</a></li>
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=16">FECHA 2</a></li>
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=32">FECHA 3</a></li>
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=48">FECHA 4</a></li>
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=64">FECHA 5</a></li>
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=80">FECHA 6</a></li>
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=96">OCTAVOS</a></li>
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/ResultadosCuartos.php?desde=112">CUARTOS</a></li>
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/ResultadosSemis.php?desde=120">SEMIS</a></li>
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/ResultadosFinal.php?desde=124">FINAL</a></li>
-            <!--<li role="separator" class="divider"></li>-->
-            <!--<li><a href="#">Separated link</a></li>-->
-        </ul>
-    </li>
-    <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            PRONOSTICOS <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosEmma.php">EMMA</a></li>
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosFer.php">FER</a></li>
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosLechu.php">FEDE</a></li>
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosAldo.php">ALDO</a></li>
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosMosca.php">MOSCA</a></li>
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosSeba.php">SEBA</a></li>
-            <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosGenerales.php">GENERALES</a></li>
-        </ul>
-    </li>
-</ul>
+<ul th:replace="layout/menu :: menu"></ul>
 
 <h1>Resultados de Partidos Fecha
     <!--?php
