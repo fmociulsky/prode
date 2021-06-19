@@ -6,6 +6,8 @@ import io.fercha.prode.entity.Partido;
 import io.fercha.prode.service.ParticipanteService;
 import io.fercha.prode.service.PartidoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +27,7 @@ public class ProdeController {
 
 
     @GetMapping("/")
-    public String home(Model model){
+    public String home(Model model, @AuthenticationPrincipal User user){
         final List<Participante> participantes = participanteService.listar();
         model.addAttribute("participantes", participantes);
         return "index";

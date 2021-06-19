@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
 </head>
@@ -7,7 +10,7 @@
 
     <ul class="nav nav-pills" th:fragment="menu">
         <li role="presentation" class="active"><a th:href="@{/}">POSICIONES</a></li>
-        <li role="presentation" class="dropdown">
+        <li sec:authorize="hasRole('ROLE_ADMIN')" role="presentation" class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 ADMIN <span class="caret"></span>
             </a>
@@ -40,17 +43,13 @@
                 PRONOSTICOS <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a th:href="@{/pronostico?faseEnum=FECHA1}">EMMA</a></li>
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosFer.php">FER</a></li>
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosLechu.php">FEDE</a></li>
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosAldo.php">ALDO</a></li>
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosMosca.php">MOSCA</a></li>
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosSeba.php">SEBA</a></li>
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosGenerales.php">GENERALES</a></li>
-                <!--<li role="separator" class="divider"></li>-->
-                <!--<li><a href="#">Separated link</a></li>-->
+                <li th:each="participante: ${participantes}"><a th:href="@{/pronostico/} + ${participante.id} + '?faseEnum=FECHA1'" role="button" th:text="${participante.nombre}"></a></li>
             </ul>
         </li>
+        <form th:method="post" th:action="@{/logout}">
+            <li role="presentation"><input type="submit" value="LOGOUT"></li>
+        </form>
+
     </ul>
 
 </body>

@@ -9,10 +9,13 @@ import io.fercha.prode.service.ParticipanteService;
 import io.fercha.prode.service.PartidoService;
 import io.fercha.prode.service.PronosticoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,23 +37,26 @@ public class PronosticoController {
     @Autowired
     PronosticoService pronosticoService;
 
-    @GetMapping("")
-    public String listar(FaseEnum faseEnum, Model model){
-        PronosticoForm pronosticoForm = new PronosticoForm();
+
+    @GetMapping("/{userId}")
+    public String listar(@PathVariable Long userId,  FaseEnum faseEnum, Model model){
+        final PronosticoForm pronosticoForm = new PronosticoForm();
         final List<Partido> partidos = partidoService.getPartidos(faseEnum);
-        //Esto se va a reemplazar por el usuario
-        final Participante participante = participanteService.listar().get(0);
+        final Participante participante = participanteService.buscarPorId(userId);
         final List<Pronostico> pronosticos = pronosticoService.listar(participante).stream().filter(pronostico ->
                 partidos.stream().anyMatch(p-> p.getId().equals(pronostico.getPartido().getId())))
                 .collect(Collectors.toList());
         pronosticoForm.addAll(pronosticos);
+        model.addAttribute("fases", FaseEnum.values());
         model.addAttribute("form", pronosticoForm);
-        model.addAttribute("fase", faseEnum);
+        model.addAttribute("faseActual", faseEnum);
+        final List<Participante> participantes = participanteService.listar();
+        model.addAttribute("participantes", participantes);
         return "pronosticoList";
     }
 
     @PostMapping("/guardar")
-    public String guardar(PronosticoForm pronosticoForm, Errors errors, @RequestParam FaseEnum faseEnum){
+    public String guardar(PronosticoForm pronosticoForm, Errors errors, FaseEnum faseEnum, @AuthenticationPrincipal User user){
         if(errors.hasErrors()) return "partido";
         pronosticoService.guardarPronosticos(pronosticoForm);
         return "redirect:/pronostico?faseEnum="+faseEnum;

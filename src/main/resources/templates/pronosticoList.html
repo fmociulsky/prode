@@ -24,7 +24,14 @@
 
 <h1>Partidos Fecha</h1>
 
-<form th:action="@{/pronostico/guardar?faseEnum=} + ${fase}" method="post" th:object="${form}">
+<form th:action="@{/pronostico/guardar?faseEnum=} + ${faseActual}" method="post" th:object="${form}">
+    <table>
+        <tr>
+            <ul class="nav nav-tabs">
+                <li th:each="fase: ${fases}" th:class="${faseActual == fase ? 'active btn' : 'btn btn-info'}"><a th:href="@{/pronostico?faseEnum=} + ${fase}" role="button" th:text="${fase.value}"></a></li>
+            </ul>
+        </tr>
+    </table>
     <table class="table">
         <thead>
         <tr>
@@ -53,7 +60,7 @@
         <td style='padding-left: 75px;'></td>
         <td></td>
     </table>
-    <input class="btn btn-primary btn-sm" type="submit">
+    <input class="btn btn-primary btn-sm" type="submit" value="Guardar">
 </form>
 </body>
 </html>
