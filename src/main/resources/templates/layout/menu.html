@@ -23,18 +23,16 @@
                 RESULTADOS <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=0">FECHA 1</a></li>
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=16">FECHA 2</a></li>
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=32">FECHA 3</a></li>
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=48">FECHA 4</a></li>
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=64">FECHA 5</a></li>
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=80">FECHA 6</a></li>
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/Resultados.php?desde=96">OCTAVOS</a></li>
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/ResultadosCuartos.php?desde=112">CUARTOS</a></li>
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/ResultadosSemis.php?desde=120">SEMIS</a></li>
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/ResultadosFinal.php?desde=124">FINAL</a></li>
-                <!--<li role="separator" class="divider"></li>-->
-                <!--<li><a href="#">Separated link</a></li>-->
+                <li><a th:href="@{/partido?fase=FECHA1}">FECHA 1</a></li>
+                <li><a th:href="@{/partido?fase=FECHA2}">FECHA 2</a></li>
+                <li><a th:href="@{/partido?fase=FECHA3}">FECHA 3</a></li>
+                <li><a th:href="@{/partido?fase=FECHA1}">FECHA 4</a></li>
+                <li><a th:href="@{/partido?fase=FECHA1}">FECHA 5</a></li>
+                <li><a th:href="@{/partido?fase=FECHA1}">FECHA 6</a></li>
+                <li><a th:href="@{/partido?fase=OCTAVOS}">OCTAVOS</a></li>
+                <li><a th:href="@{/partido?fase=CUARTOS}">CUARTOS</a></li>
+                <li><a th:href="@{/partido?fase=SEMIS}">SEMIS</a></li>
+                <li><a th:href="@{/partido?fase=FINAL}">FINAL</a></li>
             </ul>
         </li>
         <li role="presentation" class="dropdown">
@@ -42,7 +40,7 @@
                 PRONOSTICOS <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosEmma.php">EMMA</a></li>
+                <li><a th:href="@{/pronostico?faseEnum=FECHA1}">EMMA</a></li>
                 <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosFer.php">FER</a></li>
                 <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosLechu.php">FEDE</a></li>
                 <li><a href="https://prodechampions2018.000webhostapp.com/Pantallas/PronosticosAldo.php">ALDO</a></li>

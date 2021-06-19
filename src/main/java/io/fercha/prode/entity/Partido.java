@@ -1,10 +1,13 @@
 package io.fercha.prode.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -21,9 +24,12 @@ public class Partido implements Serializable {
     private Equipo local;
     @OneToOne
     private Equipo visitante;
-    private int golesLocal;
-    private int golesVisitante;
+    private Integer golesLocal;
+    private Integer golesVisitante;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
     private Date fecha;
+    @NotNull
     private FaseEnum fase;
 
     public Partido(Long id, Equipo local, Equipo visitante, int golesLocal, int golesVisitante, Date fecha, FaseEnum fase) {
@@ -63,19 +69,19 @@ public class Partido implements Serializable {
         this.visitante = visitante;
     }
 
-    public int getGolesLocal() {
+    public Integer getGolesLocal() {
         return golesLocal;
     }
 
-    public void setGolesLocal(int golesLocal) {
+    public void setGolesLocal(Integer golesLocal) {
         this.golesLocal = golesLocal;
     }
 
-    public int getGolesVisitante() {
+    public Integer getGolesVisitante() {
         return golesVisitante;
     }
 
-    public void setGolesVisitante(int golesVisitante) {
+    public void setGolesVisitante(Integer golesVisitante) {
         this.golesVisitante = golesVisitante;
     }
 

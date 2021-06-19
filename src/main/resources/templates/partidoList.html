@@ -22,33 +22,7 @@
 <body>
 <ul th:replace="layout/menu :: menu"></ul>
 
-<h1>Resultados de Partidos Fecha
-    <!--?php
-				if(isset($_GET['desde'])){
-					$desde = $_GET['desde'];
-				}else{
-					$desde = 0;
-				}
-				$desde = ($desde / 16) + 1;
-				if($desde == 7){
-					$desde = "OCTAVOS";
-				}
-
-				if($desde == 8){
-					$desde = "CUARTOS";
-				}
-
-				if($desde == 9){
-					$desde = "SEMIS";
-				}
-
-				if($desde == 10){
-					$desde = "FINAL";
-				}
-
-				echo $desde;
-		?-->
-</h1>
+<h1>Partidos Fecha</h1>
 
 <table class="table">
     <thead>
@@ -61,59 +35,36 @@
         <th>Visitante</th>
         <th></th>
         <th>Fecha</th>
+        <th>Fase</th>
+        <th></th>
+        <th></th>
         <th></th>
     </tr>
     </thead>
-    <!--?php
-				$hoy = date('Y-m-d');
-				if(isset($_GET['desde'])){
-					$desde = $_GET['desde'];
-				}else{
-					$desde = 0;
-				}
-
-				$registrosPartidos=mysqli_query($conexion,"select idPartido, idLocal, idVisitante, golesLocal, golesVisitante, fecha from partidos LIMIT ".$desde.", 16") or
-						die("Problemas en el select:".mysqli_error($conexion));
-				$i = 1;
-				while ($reg=mysqli_fetch_array($registrosPartidos))	{
-
-					echo "<tr>";
-    echo "<td>". $i."</td>";
-    $registrosLocal=mysqli_query($conexion,"select  nombre from equipos where id=".$reg['idLocal']) or
-    die("Problemas en el select:".mysqli_error($conexion));
-    while ($regLocal=mysqli_fetch_array($registrosLocal))	{
-    ?-->
-    <td><img src="/imagenes/equipos/<?php  echo $reg['idLocal']	?>.png" style="width:25px;height:25px;"></td>
-    <!--?php
-						echo "<td>". $regLocal['nombre']."</td>";
-    }
-    ?-->
-    <td style='padding-left: 75px;'><?php  echo $reg['golesLocal']?></td>
-    <td style='padding-left: 75px;'><?php  echo $reg['golesVisitante']?></td>
-    <!--?php
-					$registrosVisitante=mysqli_query($conexion,"select  nombre from equipos where id=".$reg['idVisitante']) or
-					die("Problemas en el select:".mysqli_error($conexion));
-					while ($regVisi=mysqli_fetch_array($registrosVisitante))	{
-						echo "<td>". $regVisi['nombre']."</td>";
-    }
-    ?-->
-    <td><img src="/imagenes/equipos/<?php  echo $reg['idVisitante']	?>.png" style="width:25px;height:25px;"></td>
-    <!--?php
-					echo "<td style='padding-left: 40px;padding-right: 40px' >". date("d/m/Y", strtotime($reg['fecha']))."</td>";
-    $date = date('Y-m-j');
-    $manana = strtotime ( '+1 hour' , strtotime ( $date ) ) ;
-    $manana = date ( 'Y-m-j' , $manana );
-    if(strtotime($reg['fecha']) <=  strtotime($manana)){
-
-    ?-->
-    <!--td><input type="button" class="btn btn-primary btn-sm" value="Ver Pronosticos"
-               onclick=window.open("PronosticosPorPartido.php?partido=<!?php echo $reg['idPartido']?>","","width=600");
-        ?php
-					}
-						echo "<tr>";
-        $i++;
-        }
-        ?-->
+    <tr th:each="partido, iStat: ${partidos}">
+        <td th:text="${iStat.index} + 1" />
+        <td></td>
+        <td th:text="${partido.local.nombre}" />
+        <td th:text="${partido.golesLocal}" />
+        <td th:text="${partido.golesVisitante}" />
+        <td th:text="${partido.visitante.nombre}" />
+        <td></td>
+        <td th:text="${#dates.format(partido.fecha, 'dd-MM-yyyy')}"/>
+        <td th:text="${partido.fase.value}"/>
+        <td></td>
+        <td>
+            <input type="button" th:onclick="'window.location.href = \'' + @{/partido/{id}(id=${partido.id})} + '\''" class="btn btn-primary btn-sm" th:value="Modificar"/>
+        </td>
+        <td>
+            <input type="button" th:onclick="'window.location.href = \'' + @{/partido/eliminar/{id}(id=${partido.id})} + '\''" class="btn btn-primary btn-sm" th:value="Eliminar"/>
+        </td>
+    </tr>
+    <td></td>
+    <td style='padding-left: 75px;'></td>
+    <td style='padding-left: 75px;'></td>
+    <td></td>
 </table>
+<input type="button" th:onclick="window.location.href='/partido/nuevoPartido'" class="btn btn-primary btn-sm" th:value="Nuevo"/>
+<input type="button" th:onclick="window.location.href='/'" class="btn btn-primary btn-sm" th:value="Volver"/>
 </body>
 </html>

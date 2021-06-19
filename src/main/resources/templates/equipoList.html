@@ -34,8 +34,12 @@
             <td th:text="${equipo.id}" />
             <td th:text="${equipo.nombre}" />
             <td></td>
-            <td> <a th:href="@{/equipo/} + ${equipo.id}" th:text="Modificar" /> </td>
-            <td> <a th:href="@{equipo/eliminar/} + ${equipo.id}" th:text="Eliminar" /> </td>
+            <td>
+                <input type="button" th:onclick="'window.location.href = \'' + @{/equipo/{id}(id=${equipo.id})} + '\''" class="btn btn-primary btn-sm" th:value="Modificar"/>
+            </td>
+            <td>
+                <input type="button" th:onclick="'window.location.href = \'' + @{/equipo/eliminar/{id}(id=${equipo.id})} + '\''" class="btn btn-primary btn-sm" th:value="Eliminar"/>
+            </td>
         </tr>
     </table>
     <a th:href="@{/equipo/nuevoEquipo}" th:text="Nuevo" />
