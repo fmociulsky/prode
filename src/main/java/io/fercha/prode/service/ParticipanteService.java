@@ -2,8 +2,10 @@ package io.fercha.prode.service;
 
 import io.fercha.prode.dto.ParticipanteRepository;
 import io.fercha.prode.entity.Participante;
+import io.fercha.prode.security.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,5 +34,9 @@ public class ParticipanteService {
 
     public void eliminar(Participante participante) {
         participanteRepository.delete(participante);
+    }
+
+    public Participante buscarPorUser(Usuario usuario) {
+        return participanteRepository.findByUsuario(usuario);
     }
 }

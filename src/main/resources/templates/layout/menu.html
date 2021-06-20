@@ -43,7 +43,7 @@
                 PRONOSTICOS <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li th:each="participante: ${participantes}"><a th:href="@{/pronostico/} + ${participante.id} + '?faseEnum=FECHA1'" role="button" th:text="${participante.nombre}"></a></li>
+                <li th:each="participante: ${participantes}"><a th:href="@{/pronostico/} + ${participante.usuario.idusuario} + '?faseEnum=FECHA1'" role="button" th:text="${participante.usuario.username}"></a></li>
             </ul>
         </li>
         <form th:method="post" th:action="@{/logout}">

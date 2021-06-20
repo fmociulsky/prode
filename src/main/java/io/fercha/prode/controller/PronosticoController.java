@@ -58,6 +58,7 @@ public class PronosticoController {
     @PostMapping("/guardar")
     public String guardar(PronosticoForm pronosticoForm, Errors errors, FaseEnum faseEnum, @AuthenticationPrincipal User user){
         if(errors.hasErrors()) return "partido";
+        //Participante participante = participanteService.buscarPorUser(user);
         pronosticoService.guardarPronosticos(pronosticoForm);
         return "redirect:/pronostico?faseEnum="+faseEnum;
     }

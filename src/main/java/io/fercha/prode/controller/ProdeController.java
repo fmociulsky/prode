@@ -3,11 +3,15 @@ package io.fercha.prode.controller;
 import io.fercha.prode.entity.FaseEnum;
 import io.fercha.prode.entity.Participante;
 import io.fercha.prode.entity.Partido;
+import io.fercha.prode.security.Usuario;
 import io.fercha.prode.service.ParticipanteService;
 import io.fercha.prode.service.PartidoService;
+import io.fercha.prode.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +27,9 @@ public class ProdeController {
 
     @Autowired
     PartidoService partidoService;
+
+    @Autowired
+    UsuarioService usuarioService;
 
 
 

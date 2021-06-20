@@ -1,18 +1,19 @@
 package io.fercha.prode.entity;
 
+import io.fercha.prode.security.Usuario;
 import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.Serializable;
 
 import static javax.persistence.GenerationType.IDENTITY;
-import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 public class Participante implements Serializable {
@@ -29,14 +30,15 @@ public class Participante implements Serializable {
     @Lob
     private byte[] foto;
     @NotNull
-    private User user;
+    @OneToOne
+    private Usuario usuario;
 
-    public Participante(String name, String password, String nombre, String apellido, String email, byte[] foto, User user) {
+    public Participante(String name, String password, String nombre, String apellido, String email, byte[] foto, Usuario usuario) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.foto = foto;
-        this.user = user;
+        this.usuario = usuario;
     }
 
     public Participante() {
@@ -82,11 +84,11 @@ public class Participante implements Serializable {
         this.foto = foto;
     }
 
-    public User getUser() {
-        return user;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
