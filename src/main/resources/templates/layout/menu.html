@@ -1,56 +1,42 @@
-<!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
+<ul class="nav nav-pills" th:fragment="menu">
+    <li role="presentation" class="active"><a th:href="@{/}">POSICIONES</a></li>
+    <li sec:authorize="hasRole('ROLE_ADMIN')" role="presentation" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            ADMIN <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a th:href="@{/equipo}" th:text="Equipos"/></li>
+            <li><a th:href="@{/participante}" th:text="Participantes"/></li>
+            <li><a th:href="@{/partido}" th:text="Partidos"/></li>
 
-    <ul class="nav nav-pills" th:fragment="menu">
-        <li role="presentation" class="active"><a th:href="@{/}">POSICIONES</a></li>
-        <li sec:authorize="hasRole('ROLE_ADMIN')" role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                ADMIN <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a th:href="@{/equipo}" th:text="Equipos"/></li>
-                <li><a th:href="@{/participante}" th:text="Participantes"/></li>
-                <li><a th:href="@{/partido}" th:text="Partidos"/></li>
-
-            </ul>
-        </li>
-        <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                RESULTADOS <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a th:href="@{/partido?fase=FECHA1}">FECHA 1</a></li>
-                <li><a th:href="@{/partido?fase=FECHA2}">FECHA 2</a></li>
-                <li><a th:href="@{/partido?fase=FECHA3}">FECHA 3</a></li>
-                <li><a th:href="@{/partido?fase=FECHA1}">FECHA 4</a></li>
-                <li><a th:href="@{/partido?fase=FECHA1}">FECHA 5</a></li>
-                <li><a th:href="@{/partido?fase=FECHA1}">FECHA 6</a></li>
-                <li><a th:href="@{/partido?fase=OCTAVOS}">OCTAVOS</a></li>
-                <li><a th:href="@{/partido?fase=CUARTOS}">CUARTOS</a></li>
-                <li><a th:href="@{/partido?fase=SEMIS}">SEMIS</a></li>
-                <li><a th:href="@{/partido?fase=FINAL}">FINAL</a></li>
-            </ul>
-        </li>
-        <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                PRONOSTICOS <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li th:each="participante: ${participantes}"><a th:href="@{/pronostico/} + ${participante.usuario.idusuario} + '?faseEnum=FECHA1'" role="button" th:text="${participante.usuario.username}"></a></li>
-            </ul>
-        </li>
-        <form th:method="post" th:action="@{/logout}">
-            <li role="presentation"><input type="submit" value="LOGOUT"></li>
-        </form>
-
-    </ul>
-
-</body>
-</html>
+        </ul>
+    </li>
+    <li role="presentation" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            RESULTADOS <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a th:href="@{/partido?fase=FECHA1}">FECHA 1</a></li>
+            <li><a th:href="@{/partido?fase=FECHA2}">FECHA 2</a></li>
+            <li><a th:href="@{/partido?fase=FECHA3}">FECHA 3</a></li>
+            <li><a th:href="@{/partido?fase=FECHA1}">FECHA 4</a></li>
+            <li><a th:href="@{/partido?fase=FECHA1}">FECHA 5</a></li>
+            <li><a th:href="@{/partido?fase=FECHA1}">FECHA 6</a></li>
+            <li><a th:href="@{/partido?fase=OCTAVOS}">OCTAVOS</a></li>
+            <li><a th:href="@{/partido?fase=CUARTOS}">CUARTOS</a></li>
+            <li><a th:href="@{/partido?fase=SEMIS}">SEMIS</a></li>
+            <li><a th:href="@{/partido?fase=FINAL}">FINAL</a></li>
+        </ul>
+    </li>
+    <li role="presentation" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            PRONOSTICOS <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li th:each="participante: ${participantes}"><a th:href="@{/pronostico/} + ${participante.usuario.idusuario} + '?faseEnum=FECHA1'" role="button" th:text="${participante.usuario.username}"></a></li>
+        </ul>
+    </li>
+    <form th:method="post" th:action="@{/logout}">
+        <li role="presentation"><input type="submit" value="LOGOUT"></li>
+    </form>
+</ul>
