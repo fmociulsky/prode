@@ -1,78 +1,103 @@
 <!DOCTYPE html>
-<!--suppress ALL -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <!-- basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>PRODE CHAMPIONS 2019/2020</title>
-
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <link th:href="@{/css/prode.css}" rel="stylesheet" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Prode Champions</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- responsive-->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- awesome fontfamily -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
-<body>
+<!-- body -->
+
+<body class="main-layout">
+    <div th:replace="layout/menu :: menu"></div>
+    <header th:replace="layout/header :: header"></header>
 
 
-<ul th:replace="layout/menu :: menu"></ul>
+    <!-- works -->
+    <div class="works">
+        <div class="container">
+            <div class="row">
+                <h1>POSICIONES</h1>
+                <table class="table table-condensed table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Posicion</th>
+                        <th>Caripela</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Puntos</th>
+                        <th>Detalle</th>
+                    </tr>
+                    </thead>
 
-<h1>POSICIONES</h1>
-<table class="table table-condensed table-bordered">
-    <thead>
-    <tr>
-        <th>Posicion</th>
-        <th>Caripela</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Puntos</th>
-        <th>Detalle</th>
-    </tr>
-    </thead>
-
-    <tr th:each="participante, iStat: ${participantes}">
-        <td th:text="${iStat.index}" />
-        <td />
-        <td th:text="${participante.nombre}" />
-        <td th:text="${participante.apellido}" />
-        <td/>
-        <td/>
-    </tr>
-    <!--?php
-			$i = 1;
-			while ($reg=mysqli_fetch_array($registros))	{
-		?>
-    <tr>
-        <td><?php  echo $i					?></td>
-        <td><img src="https://prodechampions2018.000webhostapp.com/Pantallas/imagenes/<?php  echo $reg['id']	?>.jpg" style="width:50px;height:50px;" class="img-thumbnail"></td>
-        <td><?php  echo $reg['nombre']	?></td>
-        <td><?php  echo $reg['apellido']?></td>
-
-        <td>
-            <?php
-						$registrosPuntos=mysqli_query($conexion,"select puntos from pronosticos where idUsuario = ".$reg['id']) or
-							die("Problemas en el select:".mysqli_error($conexion));
-						$puntos = 0;
-						while ($regPtos=mysqli_fetch_array($registrosPuntos))	{
-								$puntos = $puntos + $regPtos['puntos'];
-						}
-						echo $puntos;
-					?>
-        </td>
-        <td>
-            <input type="button" class="btn btn-primary btn-sm" value="Detalle"
-                   onclick=window.open("DetallePorFecha.php?usuario=<?php echo $reg['id']?>","","width=600");
-        </td>
-    </tr>
-    <?php
-				$i++;
-			}
-		?-->
-</table>
-
-</body>
+                    <tr th:each="participante, iStat: ${participantes}">
+                        <td th:text="${iStat.index}" />
+                        <td />
+                        <td th:text="${participante.nombre}" />
+                        <td th:text="${participante.apellido}" />
+                        <td/>
+                        <td/>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- works -->
+    <!-- footer -->
+    <footer>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a class="logo_bottom" href="index.html">BitCYPO</a>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                  <div class="Informa conta ">
+                     <h3>Contact Us</h3>
+                     <ul>
+                        <li> <a href="Javascript:void(0) "> <i class="fa fa-map-marker " aria-hidden="true "></i> Location
+                           </a>
+                        </li>
+                        <li> <a href="Javascript:void(0) "><i class="fa fa-phone " aria-hidden="true "></i> Call +01 1234567890
+                           </a>
+                        </li>
+                        <li> <a href="Javascript:void(0) "> <i class="fa fa-envelope " aria-hidden="true "></i> demo@gmail.com
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="copyright text_align_center ">
+               <div class="container ">
+                  <div class="row ">
+                     <div class="col-md-12 ">
+                        <p>© 2020 All Rights Reserved. Design by   <a href="https://html.design/ "> Free Html Template</a></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      </footer>
+      <!-- end footer -->
+   </body>
 </html>

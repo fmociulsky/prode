@@ -1,4 +1,5 @@
-<ul class="nav nav-pills" th:fragment="menu">
+<div id="mySidepanel" class="sidepanel" th:fragment="menu">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
     <li role="presentation" class="active"><a th:href="@{/}">POSICIONES</a></li>
     <li sec:authorize="hasRole('ROLE_ADMIN')" role="presentation" class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -36,7 +37,7 @@
             <li th:each="participante: ${participantes}"><a th:href="@{/pronostico/} + ${participante.usuario.idusuario} + '?faseEnum=FECHA1'" role="button" th:text="${participante.usuario.username}"></a></li>
         </ul>
     </li>
-    <form th:method="post" th:action="@{/logout}">
-        <li role="presentation"><input type="submit" value="LOGOUT"></li>
-    </form>
-</ul>
+    <script src="/js/jquery.min.js "></script>
+    <script src="/js/bootstrap.bundle.min.js "></script>
+    <script src="/js/custom.js "></script>
+</div>

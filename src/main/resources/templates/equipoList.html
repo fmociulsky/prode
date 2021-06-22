@@ -11,39 +11,54 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- responsive-->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- awesome fontfamily -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Latest compiled and minified JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 
     <ul th:replace="layout/menu :: menu"></ul>
+    <header th:replace="layout/header :: header"></header>
+<div class="works">
+    <div class="container">
+        <div class="row">
+            <h1>EQUIPOS</h1>
+            <table class="table table-condensed table-bordered">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Escudo</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
 
-    <h1>EQUIPOS</h1>
-    <table class="table table-condensed table-bordered">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Escudo</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-
-        <tr th:each="equipo, iStat: ${equipos}">
-            <td th:text="${equipo.id}" />
-            <td th:text="${equipo.nombre}" />
-            <td></td>
-            <td>
-                <input type="button" th:onclick="'window.location.href = \'' + @{/equipo/{id}(id=${equipo.id})} + '\''" class="btn btn-primary btn-sm" th:value="Modificar"/>
-            </td>
-            <td>
-                <input type="button" th:onclick="'window.location.href = \'' + @{/equipo/eliminar/{id}(id=${equipo.id})} + '\''" class="btn btn-primary btn-sm" th:value="Eliminar"/>
-            </td>
-        </tr>
-    </table>
-    <a th:href="@{/equipo/nuevoEquipo}" th:text="Nuevo" />
-    <a th:href="@{/}" th:text="Volver" />
+                <tr th:each="equipo, iStat: ${equipos}">
+                    <td th:text="${equipo.id}" />
+                    <td th:text="${equipo.nombre}" />
+                    <td></td>
+                    <td>
+                        <input type="button" th:onclick="'window.location.href = \'' + @{/equipo/{id}(id=${equipo.id})} + '\''" class="btn btn-primary btn-sm" th:value="Modificar"/>
+                    </td>
+                    <td>
+                        <input type="button" th:onclick="'window.location.href = \'' + @{/equipo/eliminar/{id}(id=${equipo.id})} + '\''" class="btn btn-primary btn-sm" th:value="Eliminar"/>
+                    </td>
+                </tr>
+            </table>
+            <a th:href="@{/equipo/nuevoEquipo}" th:text="Nuevo" />
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

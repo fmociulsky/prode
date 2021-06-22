@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>PRODE CHAMPIONS 2019/2020</title>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link th:href="@{/css/prode.css}" rel="stylesheet" />
+</head>
+<body>
+
+
+<ul th:replace="layout/menu :: menu"></ul>
+
+<h1>POSICIONES</h1>
+<table class="table table-condensed table-bordered">
+    <thead>
+    <tr>
+        <th>Posicion</th>
+        <th>Caripela</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Puntos</th>
+        <th>Detalle</th>
+    </tr>
+    </thead>
+
+    <tr th:each="participante, iStat: ${participantes}">
+        <td th:text="${iStat.index}" />
+        <td />
+        <td th:text="${participante.nombre}" />
+        <td th:text="${participante.apellido}" />
+        <td/>
+        <td/>
+    </tr>
+    <!--?php
+			$i = 1;
+			while ($reg=mysqli_fetch_array($registros))	{
+		?>
+    <tr>
+        <td><?php  echo $i					?></td>
+        <td><img src="https://prodechampions2018.000webhostapp.com/Pantallas/imagenes/<?php  echo $reg['id']	?>.jpg" style="width:50px;height:50px;" class="img-thumbnail"></td>
+        <td><?php  echo $reg['nombre']	?></td>
+        <td><?php  echo $reg['apellido']?></td>
+
+        <td>
+            <?php
+						$registrosPuntos=mysqli_query($conexion,"select puntos from pronosticos where idUsuario = ".$reg['id']) or
+							die("Problemas en el select:".mysqli_error($conexion));
+						$puntos = 0;
+						while ($regPtos=mysqli_fetch_array($registrosPuntos))	{
+								$puntos = $puntos + $regPtos['puntos'];
+						}
+						echo $puntos;
+					?>
+        </td>
+        <td>
+            <input type="button" class="btn btn-primary btn-sm" value="Detalle"
+                   onclick=window.open("DetallePorFecha.php?usuario=<?php echo $reg['id']?>","","width=600");
+        </td>
+    </tr>
+    <?php
+				$i++;
+			}
+		?-->
+</table>
+
+</body>
+</html>

@@ -15,56 +15,72 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- responsive-->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- awesome fontfamily -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Latest compiled and minified JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-<ul th:replace="layout/menu :: menu"></ul>
+<div th:replace="layout/menu :: menu"></div>
+<header th:replace="layout/header :: header"></header>
 
-<h1>Partidos Fecha</h1>
+<div class="works">
+    <div class="container">
+        <div class="row">
+            <h1>Partidos Fecha</h1>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>Nro</th>
-        <th></th>
-        <th>Local</th>
-        <th style="width:150px">Goles Local</th>
-        <th style="width:150px">Goles Visitante</th>
-        <th>Visitante</th>
-        <th></th>
-        <th>Fecha</th>
-        <th>Fase</th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-    </thead>
-    <tr th:each="partido, iStat: ${partidos}">
-        <td th:text="${iStat.index} + 1" />
-        <td></td>
-        <td th:text="${partido.local.nombre}" />
-        <td th:text="${partido.golesLocal}" />
-        <td th:text="${partido.golesVisitante}" />
-        <td th:text="${partido.visitante.nombre}" />
-        <td></td>
-        <td th:text="${#dates.format(partido.fecha, 'dd-MM-yyyy')}"/>
-        <td th:text="${partido.fase.value}"/>
-        <td></td>
-        <td>
-            <input type="button" th:onclick="'window.location.href = \'' + @{/partido/{id}(id=${partido.id})} + '\''" class="btn btn-primary btn-sm" th:value="Modificar"/>
-        </td>
-        <td>
-            <input type="button" th:onclick="'window.location.href = \'' + @{/partido/eliminar/{id}(id=${partido.id})} + '\''" class="btn btn-primary btn-sm" th:value="Eliminar"/>
-        </td>
-    </tr>
-    <td></td>
-    <td style='padding-left: 75px;'></td>
-    <td style='padding-left: 75px;'></td>
-    <td></td>
-</table>
-<input type="button" th:onclick="window.location.href='/partido/nuevoPartido'" class="btn btn-primary btn-sm" th:value="Nuevo"/>
-<input type="button" th:onclick="window.location.href='/'" class="btn btn-primary btn-sm" th:value="Volver"/>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nro</th>
+                    <th></th>
+                    <th>Local</th>
+                    <th style="width:150px">Goles Local</th>
+                    <th style="width:150px">Goles Visitante</th>
+                    <th>Visitante</th>
+                    <th></th>
+                    <th>Fecha</th>
+                    <th>Fase</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tr th:each="partido, iStat: ${partidos}">
+                    <td th:text="${iStat.index} + 1" />
+                    <td></td>
+                    <td th:text="${partido.local.nombre}" />
+                    <td th:text="${partido.golesLocal}" />
+                    <td th:text="${partido.golesVisitante}" />
+                    <td th:text="${partido.visitante.nombre}" />
+                    <td></td>
+                    <td th:text="${#dates.format(partido.fecha, 'dd-MM-yyyy')}"/>
+                    <td th:text="${partido.fase.value}"/>
+                    <td></td>
+                    <td>
+                        <input type="button" th:onclick="'window.location.href = \'' + @{/partido/{id}(id=${partido.id})} + '\''" class="btn btn-primary btn-sm" th:value="Modificar"/>
+                    </td>
+                    <td>
+                        <input type="button" th:onclick="'window.location.href = \'' + @{/partido/eliminar/{id}(id=${partido.id})} + '\''" class="btn btn-primary btn-sm" th:value="Eliminar"/>
+                    </td>
+                </tr>
+                <td></td>
+                <td style='padding-left: 75px;'></td>
+                <td style='padding-left: 75px;'></td>
+                <td></td>
+            </table>
+            <input type="button" th:onclick="window.location.href='/partido/nuevoPartido'" class="btn btn-primary btn-sm" th:value="Nuevo"/>
+        </div>
+    </div>
+</div>
 </body>
 </html>
