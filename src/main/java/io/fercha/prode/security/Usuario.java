@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,9 +25,9 @@ public class Usuario implements Serializable {
     @NotEmpty
     private String password;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER,cascade= CascadeType.ALL)
     @JoinColumn(name = "id_usuario")
-    private List<Rol> roles;
+    private List<Rol> roles = new ArrayList<Rol>();
 
     public Usuario(Long idusuario, @NotEmpty String username, @NotEmpty String password, List<Rol> roles) {
         this.idusuario = idusuario;
@@ -50,7 +51,7 @@ public class Usuario implements Serializable {
         return username;
     }
 
-    public void setUsermame(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 

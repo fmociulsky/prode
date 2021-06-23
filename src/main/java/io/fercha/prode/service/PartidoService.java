@@ -4,6 +4,7 @@ import io.fercha.prode.dto.ParticipanteRepository;
 import io.fercha.prode.dto.PartidoRepository;
 import io.fercha.prode.dto.PronosticoRepository;
 import io.fercha.prode.entity.FaseEnum;
+import io.fercha.prode.entity.Participante;
 import io.fercha.prode.entity.Partido;
 import io.fercha.prode.entity.Pronostico;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +34,20 @@ public class PartidoService {
     public void guardar(Partido partido){
         final boolean isNuevo = partido.getId() == null;
         final Partido partidoSaved = partidoRepository.save(partido);
+        final List<Participante> participantes = participanteRepository.findAll();
         if(isNuevo){
-            participanteRepository.findAll().forEach(participante -> {
+            participantes.forEach(participante -> {
                 final Pronostico pronostico = new Pronostico(partidoSaved, participante);
                 pronosticoRepository.save(pronostico);
+            });
+        }else{
+            participantes.forEach(participante -> {
+                final List<Pronostico> pronosticos = pronosticoRepository.findByPartidoAndParticipante(partido, participante);
+                pronosticos.forEach(pronostico -> {
+                    if(pronostico.getGolesLocal() != null && pronostico.getGolesVisitante() != null)
+                        pronostico.actualizarPuntos(partido.getGolesLocal(), partido.getGolesVisitante());
+                });
+                pronosticoRepository.saveAll(pronosticos);
             });
         }
     }
@@ -46,6 +57,9 @@ public class PartidoService {
     }
 
     public void eliminar(Partido partido) {
+        final List<Pronostico> pronosticos = pronosticoRepository.findByPartido(partido);
+        pronosticoRepository.deleteAll(pronosticos);
         partidoRepository.delete(partido);
+
     }
 }

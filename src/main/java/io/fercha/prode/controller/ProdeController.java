@@ -31,19 +31,12 @@ public class ProdeController {
     @Autowired
     UsuarioService usuarioService;
 
-
-
     @GetMapping("/")
     public String home(Model model, @AuthenticationPrincipal User user){
         final List<Participante> participantes = participanteService.listar();
         model.addAttribute("participantes", participantes);
+        model.addAttribute("fases", FaseEnum.values());
         return "index";
     }
 
-    @GetMapping("/partidos")
-    public String partidos(Model model, @RequestParam(value = "fase") FaseEnum fase){
-        final List<Partido> partidos = partidoService.getPartidos(fase);
-        model.addAttribute("partidos", partidos);
-        return "partidos";
-    }
 }

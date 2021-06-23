@@ -5,34 +5,76 @@
     <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8">
     <title>Participante</title>
 
-    <!-- Bootstrap -->
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- responsive-->
+    <link rel="stylesheet" href="/css/responsive.css">
+    <!-- awesome fontfamily -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 
-<form th:action="@{/participante/guardar}" method="post" th:object="${participante}">
-
-    <input type="hidden" name="id" id="id" th:field="*{id}">
-    <label for="nombre">Nombre</label>
-    <input type="text" name="nombre" id="nombre" th:field="*{nombre}">
-    <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error nombre</span>
-    </br>
-    <label for="apellido">Apellido</label>
-    <input type="text" name="apellido" id="apellido" th:field="*{apellido}">
-    <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error apellido</span>
-    </br>
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" th:field="*{email}">
-    </br>
-    <label>Foto: </label>
-    <input type="file" name="foto" accept="image/png, image/jpeg" />
-    </br>
-    <input type="submit" name="guardar" value="Guardar" />
-</form>
+<body>
+    <div th:replace="layout/menu :: menu"></div>
+    <header th:replace="layout/header :: header"></header>
+    <div class="works">
+        <div class="container">
+            <div class="row">
+                <a th:href="@{/participante}" role="button">
+                    PARTICIPANTE
+                </a>
+            </div>
+            <div class="row">
+                <form th:action="@{/participante/guardar}" method="post" th:object="${participante}">
+                    <input type="hidden" name="id" id="id" th:field="*{id}">
+                    <table>
+                        <tr>
+                            <td><label for="username">Username</label></td>
+                            <td><input type="text" name="username" id="username" th:field="*{usuario.username}">
+                                <span th:if="${#fields.hasErrors('username')}" th:errors="*{usuario.username}">Error nombre</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="nombre">Password</label></td>
+                            <td><input type="password" name="password" id="password" th:field="*{usuario.password}">
+                                <span th:if="${#fields.hasErrors('password')}" th:errors="*{usuario.password}">Error nombre</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="nombre">Nombre</label></td>
+                            <td><input type="text" name="nombre" id="nombre" th:field="*{nombre}">
+                                <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error nombre</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="apellido">Apellido</label></td>
+                            <td><input type="text" name="apellido" id="apellido" th:field="*{apellido}">
+                                <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error apellido</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="email">Email</label></td>
+                            <td><input type="email" name="email" id="email" th:field="*{email}"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Foto: </label></td>
+                            <td><input type="file" name="foto" accept="image/png, image/jpeg" /></td>
+                        </tr>
+                    </table>
+                    <input type="submit" name="guardar" value="Guardar" />
+                </form>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

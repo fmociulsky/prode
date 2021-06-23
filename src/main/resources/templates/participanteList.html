@@ -11,11 +11,11 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <!-- style css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <!-- responsive-->
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="/css/responsive.css">
     <!-- awesome fontfamily -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--[if lt IE 9]>
@@ -31,12 +31,14 @@
     <div class="works">
         <div class="container">
             <div class="row">
-                <h1>POSICIONES</h1>
+                <h1 class="titulo">PARTICIPANTES</h1>
+            </div>
+            <div class="row">
                 <table class="table table-condensed table-bordered">
                     <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Caripela</th>
+                        <th>Username</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Modificar</th>
@@ -45,8 +47,8 @@
                     </thead>
 
                     <tr th:each="participante, iStat: ${participantes}">
-                        <td th:text="${participante.id}" />
                         <td />
+                        <td th:text="${participante.username}" />
                         <td th:text="${participante.nombre}" />
                         <td th:text="${participante.apellido}" />
                         <td>

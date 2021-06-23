@@ -2,12 +2,16 @@ package io.fercha.prode.entity;
 
 import io.fercha.prode.security.Usuario;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.File;
@@ -30,8 +34,10 @@ public class Participante implements Serializable {
     @Lob
     private byte[] foto;
     @NotNull
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER,cascade= CascadeType.ALL)
     private Usuario usuario;
+    @Transient
+    private Integer puntos;
 
     public Participante(String name, String password, String nombre, String apellido, String email, byte[] foto, Usuario usuario) {
         this.nombre = nombre;
@@ -90,5 +96,34 @@ public class Participante implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public String getFullName(){
+        return getNombre() + " " + getApellido();
+    }
+
+    public String getUsername(){
+        return getUsuario().getUsername();
+    }
+
+    public void setUsername(String username){
+        getUsuario().setUsername(username);
+    }
+
+    public void setPassword(String password){
+        final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        getUsuario().setPassword(encoder.encode(password));
+    }
+
+    public String getPassword(){
+       return getUsuario().getPassword();
+    }
+
+    public Integer getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(Integer puntos) {
+        this.puntos = puntos;
     }
 }

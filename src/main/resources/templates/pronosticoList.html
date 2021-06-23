@@ -3,7 +3,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,52 +16,76 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- responsive-->
+    <link rel="stylesheet" href="/css/responsive.css">
+    <!-- awesome fontfamily -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Latest compiled and minified JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-<ul th:replace="layout/menu :: menu"></ul>
+<div th:replace="layout/menu :: menu"></div>
+<header th:replace="layout/header :: header"></header>
+<div class="works">
+    <div class="container">
 
-<h1>Partidos Fecha</h1>
+        <div class="row">
+            <h1 class="titulo">Pronosticos de <span th:text="${part.nombre} + ' ' + ${part.apellido}">Participante</span></h1>
+        </div>
+        <div class="row">
+            <form th:action="@{/pronostico/guardar?faseEnum=} + ${faseActual}" method="post" th:object="${form}">
+                <table>
+                    <tr>
+                        <ul class="nav nav-tabs">
+                            <li th:each="fase: ${fases}" th:class="${faseActual == fase ? 'active btn' : 'btn btn-info'}"><a th:href="@{/pronostico/} + ${part.usuario.username} + '?faseEnum=' + ${fase}" role="button" th:text="${fase.value}"></a></li>
+                        </ul>
+                    </tr>
+                </table>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Nro</th>
+                        <th></th>
+                        <th>Local</th>
+                        <th style="width:150px">Goles Local</th>
+                        <th style="width:150px">Goles Visitante</th>
+                        <th>Visitante</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tr th:each="pronostico, itemStat: *{pronosticos}">
+                        <input type="hidden" th:name="|pronosticos[${itemStat.index}].id|" th:field="*{pronosticos[__${itemStat.index}__].id}">
+                        <td th:text="${itemStat.index} + 1" />
+                        <td></td>
+                        <td th:text="${pronostico.local}"/>
+                        <td>
+                            <input th:if="${#authentication.principal.username} == ${part.usuario.username}" th:name="|pronosticos[${itemStat.index}].local.golesLocal|" th:field="*{pronosticos[__${itemStat.index}__].golesLocal}">
+                            <span th:if="${#authentication.principal.username} != ${part.usuario.username}" th:text="*{pronosticos[__${itemStat.index}__].golesLocal}"></span>
+                        </td>
+                        <td>
+                            <input th:if="${#authentication.principal.username} == ${part.usuario.username}" th:name="|pronosticos[${itemStat.index}].local.golesVisitante|" th:field="*{pronosticos[__${itemStat.index}__].golesVisitante}">
+                            <span th:if="${#authentication.principal.username} != ${part.usuario.username}" th:text="*{pronosticos[__${itemStat.index}__].golesVisitante}"></span>
+                        </td>
+                        <td th:text="${pronostico.visitante}"/>
+                        <td></td>
+                    </tr>
 
-<form th:action="@{/pronostico/guardar?faseEnum=} + ${faseActual}" method="post" th:object="${form}">
-    <table>
-        <tr>
-            <ul class="nav nav-tabs">
-                <li th:each="fase: ${fases}" th:class="${faseActual == fase ? 'active btn' : 'btn btn-info'}"><a th:href="@{/pronostico?faseEnum=} + ${fase}" role="button" th:text="${fase.value}"></a></li>
-            </ul>
-        </tr>
-    </table>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Nro</th>
-            <th></th>
-            <th>Local</th>
-            <th style="width:150px">Goles Local</th>
-            <th style="width:150px">Goles Visitante</th>
-            <th>Visitante</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tr th:each="pronostico, itemStat: *{pronosticos}">
-            <input type="hidden" th:name="|pronosticos[${itemStat.index}].id|" th:field="*{pronosticos[__${itemStat.index}__].id}">
-            <td th:text="${itemStat.index} + 1" />
-            <td></td>
-            <td th:text="${pronostico.local}"/>
-            <td><input th:name="|pronosticos[${itemStat.index}].local.golesLocal|" th:field="*{pronosticos[__${itemStat.index}__].golesLocal}"></td>
-            <td><input th:name="|pronosticos[${itemStat.index}].local.golesVisitante|" th:field="*{pronosticos[__${itemStat.index}__].golesVisitante}"></td>
-            <td th:text="${pronostico.visitante}"/>
-            <td></td>
-        </tr>
-
-        <td></td>
-        <td style='padding-left: 75px;'></td>
-        <td style='padding-left: 75px;'></td>
-        <td></td>
-    </table>
-    <input class="btn btn-primary btn-sm" type="submit" value="Guardar">
-</form>
+                    <td></td>
+                    <td style='padding-left: 75px;'></td>
+                    <td style='padding-left: 75px;'></td>
+                    <td></td>
+                </table>
+                <input th:if="${#authentication.principal.username} == ${part.usuario.username}" class="btn btn-primary btn-sm" type="submit" value="Guardar">
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -36,6 +36,7 @@ public class PartidoController {
     public String listar(@Nullable @RequestParam(value = "fase") FaseEnum faseEnum, Model model){
         List<Partido> partidos = partidoService.getPartidos(faseEnum);
         model.addAttribute("partidos", partidos);
+        model.addAttribute("fases", FaseEnum.values());
         return "partidoList";
     }
 

@@ -1,6 +1,7 @@
 package io.fercha.prode.controller;
 
 import io.fercha.prode.entity.Equipo;
+import io.fercha.prode.entity.FaseEnum;
 import io.fercha.prode.entity.Participante;
 import io.fercha.prode.service.EquipoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,13 @@ public class EquipoController {
     public String listar(Model model){
         final List<Equipo> equipos = equipoService.listar();
         model.addAttribute("equipos", equipos);
+        model.addAttribute("fases", FaseEnum.values());
         return "equipoList";
     }
 
     @GetMapping("/nuevoEquipo")
-    public String agregarEquipo(Equipo equipo){
+    public String agregarEquipo(Equipo equipo, Model model){
+        model.addAttribute("fases", FaseEnum.values());
         return "equipo";
     }
 
@@ -46,6 +49,7 @@ public class EquipoController {
     public String modificar(Equipo equipo, Model model){
         equipo = equipoService.buscarPorId(equipo.getId());
         model.addAttribute("equipo", equipo);
+        model.addAttribute("fases", FaseEnum.values());
         return "equipo";
     }
 

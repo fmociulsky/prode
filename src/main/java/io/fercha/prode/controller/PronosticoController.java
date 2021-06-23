@@ -38,11 +38,11 @@ public class PronosticoController {
     PronosticoService pronosticoService;
 
 
-    @GetMapping("/{userId}")
-    public String listar(@PathVariable Long userId,  FaseEnum faseEnum, Model model){
+    @GetMapping("/{username}")
+    public String listar(@PathVariable String username,  FaseEnum faseEnum, Model model, @AuthenticationPrincipal User user){
         final PronosticoForm pronosticoForm = new PronosticoForm();
         final List<Partido> partidos = partidoService.getPartidos(faseEnum);
-        final Participante participante = participanteService.buscarPorId(userId);
+        final Participante participante = participanteService.buscarPorUsuarioId(username);
         final List<Pronostico> pronosticos = pronosticoService.listar(participante).stream().filter(pronostico ->
                 partidos.stream().anyMatch(p-> p.getId().equals(pronostico.getPartido().getId())))
                 .collect(Collectors.toList());
@@ -52,6 +52,7 @@ public class PronosticoController {
         model.addAttribute("faseActual", faseEnum);
         final List<Participante> participantes = participanteService.listar();
         model.addAttribute("participantes", participantes);
+        model.addAttribute("part", participante);
         return "pronosticoList";
     }
 
@@ -60,6 +61,6 @@ public class PronosticoController {
         if(errors.hasErrors()) return "partido";
         //Participante participante = participanteService.buscarPorUser(user);
         pronosticoService.guardarPronosticos(pronosticoForm);
-        return "redirect:/pronostico?faseEnum="+faseEnum;
+        return "redirect:/pronostico/"+ user.getUsername()+"?faseEnum="+faseEnum;
     }
 }

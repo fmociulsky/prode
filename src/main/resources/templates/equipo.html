@@ -36,7 +36,8 @@
             <a th:href="@{/equipo}" role="button">
                 EQUIPO
             </a>
-            </br>
+        </div>
+        <div class="row">
             <form th:action="@{/equipo/guardar}" method="post" th:object="${equipo}">
 
                 <input type="hidden" name="id" id="id" th:field="*{id}">

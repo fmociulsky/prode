@@ -9,57 +9,101 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- responsive-->
+    <link rel="stylesheet" href="/css/responsive.css">
+    <!-- awesome fontfamily -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Latest compiled and minified JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
-<br>
+<body>
+<div th:replace="layout/menu :: menu"></div>
+<header th:replace="layout/header :: header"></header>
+<div class="works">
+    <div class="container">
+        <div class="row">
+            <a th:href="@{/partido}" role="button">
+                PARTIDO
+            </a>
+        </div>
+        <div class="row">
+            <form th:action="@{/partido/guardar}" method="post" th:object="${partido}">
 
-<a th:href="@{/partido}" role="button">
-    PARTIDO
-</a>
-</br>
-<form th:action="@{/partido/guardar}" method="post" th:object="${partido}">
+                <input type="hidden" name="id" id="id" th:field="*{id}">
+                <table>
+                    <tr>
+                        <td><label for="local">Local</label></td>
+                        <td>
+                            <select class="form-control" name="local"
+                                    id="local">
+                                <option value="">Seleccionar Equipo</option>
+                                <option th:each="equipo : ${equipos}" th:value="${equipo.id}"
+                                        th:text="${equipo.nombre}"
+                                        th:selected="${partido.local == null} ? 'false' :  ${equipo.id == partido.local.id}">
+                                </option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('local')}" th:errors="*{local}">Error Local</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="visitante">Visitante</label></td>
+                        <td>
+                            <select class="form-control" name="visitante"
+                                    id="visitante">
+                                <option value="">Seleccionar Equipo</option>
+                                <option th:each="equipo : ${equipos}" th:value="${equipo.id}"
+                                        th:text="${equipo.nombre}"
+                                        th:selected="${partido.local == null} ? 'false' :  ${equipo.id == partido.visitante.id}">
+                                </option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('visitante')}" th:errors="*{visitante}">Error Visitante</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Goles Local</td>
+                        <td><input type="number" name="golesLocal" id="golesLocal" th:field="*{golesLocal}"></td>
+                    </tr>
+                    <tr>
+                        <td>Goles Visitante</td>
+                        <td><input type="number" name="golesVisitante" id="golesVisitante" th:field="*{golesVisitante}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="fecha">Fecha</label></td>
+                        <td>
+                            <input type="date" name="fecha" id="fecha" th:field="*{fecha}">
+                            <span th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}">Error Fecha</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="fase">Fase</label></td>
+                        <td>
+                            <select class="form-control" name="visitante" th:field="*{fase}"
+                                    id="fase">
+                                <option value="">Seleccionar Fase</option>
+                                <option th:each="fase : ${fases}" th:value="${fase}"
+                                        th:text="${fase.value}"
+                                        th:selected="${partido.fase == null} ? 'false' :  ${fase.name == partido.fase}"
+                                >
+                                </option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('fase')}" th:errors="*{fase}">Error Fase</span>
+                        </td>
+                    </tr>
+                </table>
+                </br>
 
-    <input type="hidden" name="id" id="id" th:field="*{id}">
-    <label for="local">Local</label>
-    <select class="form-control" name="local"
-            id="local">
-        <option value="">Seleccionar Equipo</option>
-        <option th:each="equipo : ${equipos}" th:value="${equipo.id}"
-                th:text="${equipo.nombre}"
-                th:selected="${partido.local == null} ? 'false' :  ${equipo.id == partido.local.id}">
-        </option>
-    </select>
-    <span th:if="${#fields.hasErrors('local')}" th:errors="*{local}">Error Local</span>
-    <label for="visitante">Visitante</label>
-    <select class="form-control" name="visitante"
-            id="visitante">
-        <option value="">Seleccionar Equipo</option>
-        <option th:each="equipo : ${equipos}" th:value="${equipo.id}"
-                th:text="${equipo.nombre}"
-                th:selected="${partido.local == null} ? 'false' :  ${equipo.id == partido.visitante.id}">
-        </option>
-    </select>
-    <span th:if="${#fields.hasErrors('visitante')}" th:errors="*{visitante}">Error Visitante</span>
-    </br>
-    <label for="fecha">Fecha</label>
-    <input type="date" name="fecha" id="fecha" th:field="*{fecha}">
-    <span th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}">Error Fecha</span>
-    </br>
-    <label for="fase">Fase</label>
-    <select class="form-control" name="visitante" th:field="*{fase}"
-            id="fase">
-        <option value="">Seleccionar Fase</option>
-        <option th:each="fase : ${fases}" th:value="${fase}"
-                th:text="${fase.value}"
-                th:selected="${partido.fase == null} ? 'false' :  ${fase.name == partido.fase}"
-        >
-        </option>
-    </select>
-    <span th:if="${#fields.hasErrors('fase')}" th:errors="*{fase}">Error Fase</span>
-    </br>
-    <input type="submit" name="guardar" value="Guardar" />
-</form>
 
+                </br>
+                <input type="submit" name="guardar" value="Guardar" />
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

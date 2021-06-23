@@ -55,6 +55,11 @@ h1 {
      font-size: 24px
 }
 
+h1.titulo {
+     font-size: 24px;
+     color: black;
+}
+
 h2 {
      font-size: 22px
 }
@@ -296,12 +301,11 @@ ul.email {
      padding-top: 1px;
      display: flex;
      align-items: center;
-     justify-content: flex-end;
      flex-wrap: wrap;
 }
 
 ul.email li {
-     padding: 0px 30px;
+     padding: 0px 0px;
 }
 
 ul.email li:last-child {
@@ -938,4 +942,9 @@ ul.email li i {
 
 .inner_page .contact {
      margin-top: 90px;
+}
+
+.header_hi{
+    color: #fff;
+    font-size:15px;
 }
