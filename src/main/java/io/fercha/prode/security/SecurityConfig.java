@@ -26,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("ADMIN", "USER").and().withUser("user").password("{noop}321").roles("USER");
     }
 
+    /*
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
@@ -35,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception {
         build.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
+    }*/
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
