@@ -2,6 +2,7 @@ package io.fercha.prode.controller;
 
 import io.fercha.prode.entity.Equipo;
 import io.fercha.prode.entity.FaseEnum;
+import io.fercha.prode.entity.Participante;
 import io.fercha.prode.entity.Partido;
 import io.fercha.prode.entity.Pronostico;
 import io.fercha.prode.service.EquipoService;
@@ -32,11 +33,16 @@ public class PartidoController {
     @Autowired
     EquipoService equipoService;
 
+    @Autowired
+    ParticipanteService participanteService;
+
     @GetMapping("")
     public String listar(@Nullable @RequestParam(value = "fase") FaseEnum faseEnum, Model model){
         List<Partido> partidos = partidoService.getPartidos(faseEnum);
         model.addAttribute("partidos", partidos);
         model.addAttribute("fases", FaseEnum.values());
+        final List<Participante> participantes = participanteService.listar();
+        model.addAttribute("participantes", participantes);
         return "partidoList";
     }
 
@@ -45,6 +51,8 @@ public class PartidoController {
         final List<Equipo> equipos = equipoService.listar();
         model.addAttribute("equipos", equipos);
         model.addAttribute("fases", FaseEnum.values());
+        final List<Participante> participantes = participanteService.listar();
+        model.addAttribute("participantes", participantes);
         return "partido";
     }
 
@@ -62,6 +70,8 @@ public class PartidoController {
         final List<Equipo> equipos = equipoService.listar();
         model.addAttribute("equipos", equipos);
         model.addAttribute("fases", FaseEnum.values());
+        final List<Participante> participantes = participanteService.listar();
+        model.addAttribute("participantes", participantes);
         return "partido";
     }
 

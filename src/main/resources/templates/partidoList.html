@@ -3,7 +3,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -52,8 +53,8 @@
                     <th>Fecha</th>
                     <th>Fase</th>
                     <th></th>
-                    <th></th>
-                    <th></th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')"></th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')"></th>
                 </tr>
                 </thead>
                 <tr th:each="partido, iStat: ${partidos}">
@@ -67,10 +68,10 @@
                     <td th:text="${#dates.format(partido.fecha, 'dd-MM-yyyy')}"/>
                     <td th:text="${partido.fase.value}"/>
                     <td></td>
-                    <td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')">
                         <input type="button" th:onclick="'window.location.href = \'' + @{/partido/{id}(id=${partido.id})} + '\''" class="btn btn-primary btn-sm" th:value="Modificar"/>
                     </td>
-                    <td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')">
                         <input type="button" th:onclick="'window.location.href = \'' + @{/partido/eliminar/{id}(id=${partido.id})} + '\''" class="btn btn-primary btn-sm" th:value="Eliminar"/>
                     </td>
                 </tr>
