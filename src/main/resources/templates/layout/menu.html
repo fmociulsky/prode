@@ -1,38 +1,46 @@
-<div id="mySidepanel" class="sidepanel" th:fragment="menu">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    <li role="presentation" class="active"><a th:href="@{/}">POSICIONES</a></li>
-    <li sec:authorize="hasRole('ROLE_ADMIN')" role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            ADMIN <span class="caret"></span>
+<div class="container-fluid p-0" th:fragment="menu">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2 py-lg-0 px-lg-5">
+        <a href="index.html" class="navbar-brand d-block d-lg-none">
+            <h1 class="m-0 display-4 text-uppercase text-primary">Prode<span class="text-white font-weight-normal">champions</span></h1>
         </a>
-        <ul class="dropdown-menu">
-            <li><a th:href="@{/equipo}" th:text="Equipos"/></li>
-            <li><a th:href="@{/participante}" th:text="Participantes"/></li>
-            <li><a th:href="@{/partido}" th:text="Partidos"/></li>
-
-        </ul>
-    </li>
-    <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            RESULTADOS <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li th:each="fase: ${fases}">
-                <a th:href="@{'/partido?fase='} + ${fase}" th:text="${fase.value}">FECHA 1</a>
-            </li>
-        </ul>
-    </li>
-    <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            PRONOSTICOS <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li th:each="participante: ${participantes}">
-                <a th:href="@{/pronostico/} + ${participante.usuario.username} + '?faseEnum=FECHA1'" role="button" th:text="${participante.fullName}"></a>
-            </li>
-        </ul>
-    </li>
-    <script src="/js/jquery.min.js "></script>
-    <script src="/js/bootstrap.bundle.min.js "></script>
-    <script src="/js/custom.js "></script>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
+            <div class="navbar-nav mr-auto py-0 col-sm-11">
+                <a th:href="@{'/'}" class="nav-item nav-link active">Posiciones</a>
+                <div sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Admin</a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/equipo}" th:text="Equipos"class="dropdown-item"/></li>
+                        <li><a th:href="@{/participante}" th:text="Participantes"class="dropdown-item"/></li>
+                        <li><a th:href="@{/partido}" th:text="Partidos" class="dropdown-item"/></li>
+                    </ul>
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Partidos</a>
+                    <ul class="dropdown-menu">
+                        <li th:each="fase: ${fases}">
+                            <a th:href="@{'/partido?fase='} + ${fase}" th:text="${fase.value}" class="dropdown-item"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pronosticos</a>
+                    <ul class="dropdown-menu">
+                        <li th:each="participante: ${participantes}">
+                            <a th:href="@{/pronostico/} + ${participante.usuario.username} + '?faseEnum=FECHA1'" class="dropdown-item" th:text="${participante.fullName}"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="navbar-nav mr-auto py-0 ml-auto d-none d-lg-flex col-sm-1" style="width: 100%; max-width: 300px;">
+                <form th:method="post" th:action="@{/logout}">
+                    <a href="Javascript:void(0)" onclick="parentNode.parentNode.submit()" class="nav-item nav-link">
+                        <span class="header_hi" sec:authentication="name"></span>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </nav>
 </div>

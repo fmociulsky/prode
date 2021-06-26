@@ -5,41 +5,48 @@
 
 <body>
 
-    <ul th:replace="layout/menu :: menu"></ul>
-    <header th:replace="layout/header :: header"></header>
-<div class="works">
-    <div class="container">
-        <div class="row">
-            <h1 class="titulo">EQUIPOS</h1>
-        </div>
-        <div class="row">
-            <table class="table table-condensed table-bordered">
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Escudo</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
+    <!-- Topbar Start -->
+    <div th:replace="layout/header :: header"></div>
+    <!-- Topbar End -->
+    <!-- Navbar Start -->
+    <div th:replace="layout/menu :: menu"></div>
+    <!-- Navbar End -->
 
-                <tr th:each="equipo, iStat: ${equipos}">
-                    <td th:text="${equipo.id}" />
-                    <td th:text="${equipo.nombre}" />
-                    <td></td>
-                    <td>
-                        <input type="button" th:onclick="'window.location.href = \'' + @{/equipo/{id}(id=${equipo.id})} + '\''" class="btn btn-primary btn-sm" th:value="Modificar"/>
-                    </td>
-                    <td>
-                        <input type="button" th:onclick="'window.location.href = \'' + @{/equipo/eliminar/{id}(id=${equipo.id})} + '\''" class="btn btn-primary btn-sm" th:value="Eliminar"/>
-                    </td>
-                </tr>
-            </table>
-            <a th:href="@{/equipo/nuevoEquipo}" th:text="Nuevo" />
+    <!-- main -->
+    <div class="container-fluid pt-5 mb-3">
+        <div class="container">
+            <div class="section-title">
+                <h4 class="m-0 text-uppercase font-weight-bold">Equipos</h4>
+            </div>
+            <div class="owl-carousel news-carousel carousel-item-4 position-relative">
+                <div class="position-relative overflow-hidden">
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Escudo</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+
+                        <tr th:each="equipo, iStat: ${equipos}">
+                            <td th:text="${equipo.id}" />
+                            <td th:text="${equipo.nombre}" />
+                            <td></td>
+                            <td>
+                                <input type="button" th:onclick="'window.location.href = \'' + @{/equipo/{id}(id=${equipo.id})} + '\''" class="btn btn-primary btn-sm" th:value="Modificar"/>
+                            </td>
+                            <td>
+                                <input type="button" th:onclick="'window.location.href = \'' + @{/equipo/eliminar/{id}(id=${equipo.id})} + '\''" class="btn btn-primary btn-sm" th:value="Eliminar"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <a th:href="@{/equipo/nuevoEquipo}" th:text="Nuevo" />
+                </div>
+            </div>
         </div>
     </div>
-</div>
-
 </body>
 </html>

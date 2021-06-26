@@ -1,78 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="layout/head :: head"></head>
 
-<!-- body -->
-<body class="main-layout">
+<body>
+    <!-- Topbar Start -->
+    <div th:replace="layout/header :: header"></div>
+    <!-- Topbar End -->
+    <!-- Navbar Start -->
     <div th:replace="layout/menu :: menu"></div>
-    <header th:replace="layout/header :: header"></header>
+    <!-- Navbar End -->
 
-
-    <!-- works -->
-    <div class="works">
+    <!-- main -->
+    <div class="container-fluid pt-5 mb-3">
         <div class="container">
-            <div class="row">
-                <h1 class="titulo">POSICIONES</h1>
-                <table class="table table-condensed table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Posicion</th>
-                        <th>Caripela</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Puntos</th>
-                        <th>Detalle</th>
-                    </tr>
-                    </thead>
+            <div class="section-title">
+                <h4 class="m-0 text-uppercase font-weight-bold">Posiciones</h4>
+            </div>
+            <div class="owl-carousel news-carousel carousel-item-4 position-relative">
+                <div class="position-relative overflow-hidden">
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Posicion</th>
+                            <th>Caripela</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Puntos</th>
+                            <th>Detalle</th>
+                        </tr>
+                        </thead>
 
-                    <tr th:each="participante, iStat: ${participantes}">
-                        <td th:text="${iStat.index} + 1" />
-                        <td />
-                        <td th:text="${participante.nombre}" />
-                        <td th:text="${participante.apellido}" />
-                        <td th:text="${participante.puntos}"/>
-                        <td/>
-                    </tr>
-                </table>
+                        <tr th:each="participante, iStat: ${participantes}">
+                            <td th:text="${iStat.index} + 1" />
+                            <td />
+                            <td th:text="${participante.nombre}" />
+                            <td th:text="${participante.apellido}" />
+                            <td th:text="${participante.puntos}"/>
+                            <td/>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-    <!-- works -->
-    <!-- footer -->
-    <footer>
-        <div class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                          <div class="Informa conta ">
-                             <h3>Contact Us</h3>
-                             <ul>
-                                <li> <a href="Javascript:void(0) "> <i class="fa fa-map-marker " aria-hidden="true "></i> Location
-                                   </a>
-                                </li>
-                                <li> <a href="Javascript:void(0) "><i class="fa fa-phone " aria-hidden="true "></i> Call +01 1234567890
-                                   </a>
-                                </li>
-                                <li> <a href="Javascript:void(0) "> <i class="fa fa-envelope " aria-hidden="true "></i> demo@gmail.com
-                                   </a>
-                                </li>
-                             </ul>
-                          </div>
-                    </div>
-                </div>
-                <div class="copyright text_align_center ">
-                   <div class="container ">
-                      <div class="row ">
-                         <div class="col-md-12 ">
-                            <p>© 2020 All Rights Reserved. Design by   <a href="https://html.design/ "> Free Html Template</a></p>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </div>
-          </div>
-      </footer>
-      <!-- end footer -->
-   </body>
+</body>
+
 </html>

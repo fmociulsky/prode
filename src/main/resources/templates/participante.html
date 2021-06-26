@@ -4,16 +4,22 @@
 <head th:replace="layout/head :: head"></head>
 
 <body>
-    <div th:replace="layout/menu :: menu"></div>
-    <header th:replace="layout/header :: header"></header>
-    <div class="works">
-        <div class="container">
-            <div class="row">
-                <a th:href="@{/participante}" role="button">
-                    PARTICIPANTE
-                </a>
-            </div>
-            <div class="row">
+
+<!-- Topbar Start -->
+<div th:replace="layout/header :: header"></div>
+<!-- Topbar End -->
+<!-- Navbar Start -->
+<div th:replace="layout/menu :: menu"></div>
+<!-- Navbar End -->
+
+<!-- main -->
+<div class="container-fluid pt-5 mb-3">
+    <div class="container">
+        <div class="section-title">
+            <h4 class="m-0 text-uppercase font-weight-bold">EQUIPO</h4>
+        </div>
+        <div class="owl-carousel news-carousel carousel-item-4 position-relative">
+            <div class="position-relative overflow-hidden">
                 <form th:action="@{/participante/guardar}" method="post" th:object="${participante}">
                     <input type="hidden" name="id" id="id" th:field="*{id}">
                     <table>
@@ -55,6 +61,6 @@
             </div>
         </div>
     </div>
-
+</div>
 </body>
 </html>

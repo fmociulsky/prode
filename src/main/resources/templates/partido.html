@@ -2,88 +2,93 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/head :: head"></head>
+
 <body>
-<div th:replace="layout/menu :: menu"></div>
-<header th:replace="layout/header :: header"></header>
-<div class="works">
-    <div class="container">
-        <div class="row">
-            <a th:href="@{/partido}" role="button">
-                PARTIDO
-            </a>
-        </div>
-        <div class="row">
-            <form th:action="@{/partido/guardar}" method="post" th:object="${partido}">
 
-                <input type="hidden" name="id" id="id" th:field="*{id}">
-                <table>
-                    <tr>
-                        <td><label for="local">Local</label></td>
-                        <td>
-                            <select class="form-control" name="local"
-                                    id="local">
-                                <option value="">Seleccionar Equipo</option>
-                                <option th:each="equipo : ${equipos}" th:value="${equipo.id}"
-                                        th:text="${equipo.nombre}"
-                                        th:selected="${partido.local == null} ? 'false' :  ${equipo.id == partido.local.id}">
-                                </option>
-                            </select>
-                            <span th:if="${#fields.hasErrors('local')}" th:errors="*{local}">Error Local</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="visitante">Visitante</label></td>
-                        <td>
-                            <select class="form-control" name="visitante"
-                                    id="visitante">
-                                <option value="">Seleccionar Equipo</option>
-                                <option th:each="equipo : ${equipos}" th:value="${equipo.id}"
-                                        th:text="${equipo.nombre}"
-                                        th:selected="${partido.local == null} ? 'false' :  ${equipo.id == partido.visitante.id}">
-                                </option>
-                            </select>
-                            <span th:if="${#fields.hasErrors('visitante')}" th:errors="*{visitante}">Error Visitante</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Goles Local</td>
-                        <td><input type="number" name="golesLocal" id="golesLocal" th:field="*{golesLocal}"></td>
-                    </tr>
-                    <tr>
-                        <td>Goles Visitante</td>
-                        <td><input type="number" name="golesVisitante" id="golesVisitante" th:field="*{golesVisitante}"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="fecha">Fecha</label></td>
-                        <td>
-                            <input type="date" name="fecha" id="fecha" th:field="*{fecha}">
-                            <span th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}">Error Fecha</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="fase">Fase</label></td>
-                        <td>
-                            <select class="form-control" name="visitante" th:field="*{fase}"
-                                    id="fase">
-                                <option value="">Seleccionar Fase</option>
-                                <option th:each="fase : ${fases}" th:value="${fase}"
-                                        th:text="${fase.value}"
-                                        th:selected="${partido.fase == null} ? 'false' :  ${fase.name == partido.fase}"
-                                >
-                                </option>
-                            </select>
-                            <span th:if="${#fields.hasErrors('fase')}" th:errors="*{fase}">Error Fase</span>
-                        </td>
-                    </tr>
-                </table>
-                </br>
+    <!-- Topbar Start -->
+    <div th:replace="layout/header :: header"></div>
+    <!-- Topbar End -->
+    <!-- Navbar Start -->
+    <div th:replace="layout/menu :: menu"></div>
+    <!-- Navbar End -->
 
-
-                </br>
-                <input type="submit" name="guardar" value="Guardar" />
-            </form>
+    <!-- main -->
+    <div class="container-fluid pt-5 mb-3">
+        <div class="container">
+            <div class="section-title">
+                <h4 class="m-0 text-uppercase font-weight-bold">EQUIPO</h4>
+            </div>
+            <div class="owl-carousel news-carousel carousel-item-4 position-relative">
+                <div class="position-relative overflow-hidden">
+                    <form th:action="@{/partido/guardar}" method="post" th:object="${partido}">
+                        <input type="hidden" name="id" id="id" th:field="*{id}">
+                        <table>
+                            <tr>
+                                <td><label for="local">Local</label></td>
+                                <td>
+                                    <select class="form-control" name="local"
+                                            id="local">
+                                        <option value="">Seleccionar Equipo</option>
+                                        <option th:each="equipo : ${equipos}" th:value="${equipo.id}"
+                                                th:text="${equipo.nombre}"
+                                                th:selected="${partido.local == null} ? 'false' :  ${equipo.id == partido.local.id}">
+                                        </option>
+                                    </select>
+                                    <span th:if="${#fields.hasErrors('local')}" th:errors="*{local}">Error Local</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="visitante">Visitante</label></td>
+                                <td>
+                                    <select class="form-control" name="visitante"
+                                            id="visitante">
+                                        <option value="">Seleccionar Equipo</option>
+                                        <option th:each="equipo : ${equipos}" th:value="${equipo.id}"
+                                                th:text="${equipo.nombre}"
+                                                th:selected="${partido.local == null} ? 'false' :  ${equipo.id == partido.visitante.id}">
+                                        </option>
+                                    </select>
+                                    <span th:if="${#fields.hasErrors('visitante')}" th:errors="*{visitante}">Error Visitante</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Goles Local</td>
+                                <td><input type="number" name="golesLocal" id="golesLocal" th:field="*{golesLocal}"></td>
+                            </tr>
+                            <tr>
+                                <td>Goles Visitante</td>
+                                <td><input type="number" name="golesVisitante" id="golesVisitante" th:field="*{golesVisitante}"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="fecha">Fecha</label></td>
+                                <td>
+                                    <input type="date" name="fecha" id="fecha" th:field="*{fecha}">
+                                    <span th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}">Error Fecha</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="fase">Fase</label></td>
+                                <td>
+                                    <select class="form-control" name="visitante" th:field="*{fase}"
+                                            id="fase">
+                                        <option value="">Seleccionar Fase</option>
+                                        <option th:each="fase : ${fases}" th:value="${fase}"
+                                                th:text="${fase.value}"
+                                                th:selected="${partido.fase == null} ? 'false' :  ${fase.name == partido.fase}"
+                                        >
+                                        </option>
+                                    </select>
+                                    <span th:if="${#fields.hasErrors('fase')}" th:errors="*{fase}">Error Fase</span>
+                                </td>
+                            </tr>
+                        </table>
+                        </br>
+                        </br>
+                        <input type="submit" name="guardar" value="Guardar" />
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-</body>
+    </body>
 </html>

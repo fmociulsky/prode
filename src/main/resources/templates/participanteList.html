@@ -4,44 +4,51 @@
 <head th:replace="layout/head :: head"></head>
 
 <body>
+
+    <!-- Topbar Start -->
+    <div th:replace="layout/header :: header"></div>
+    <!-- Topbar End -->
+    <!-- Navbar Start -->
     <div th:replace="layout/menu :: menu"></div>
-    <header th:replace="layout/header :: header"></header>
+    <!-- Navbar End -->
 
-    <div class="works">
+    <!-- main -->
+    <div class="container-fluid pt-5 mb-3">
         <div class="container">
-            <div class="row">
-                <h1 class="titulo">PARTICIPANTES</h1>
+            <div class="section-title">
+                <h4 class="m-0 text-uppercase font-weight-bold">PARTICIPANTES</h4>
             </div>
-            <div class="row">
-                <table class="table table-condensed table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Caripela</th>
-                        <th>Username</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Modificar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                    </thead>
+            <div class="owl-carousel news-carousel carousel-item-4 position-relative">
+                <div class="position-relative overflow-hidden">
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Caripela</th>
+                            <th>Username</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Modificar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                        </thead>
 
-                    <tr th:each="participante, iStat: ${participantes}">
-                        <td />
-                        <td th:text="${participante.username}" />
-                        <td th:text="${participante.nombre}" />
-                        <td th:text="${participante.apellido}" />
-                        <td>
-                            <input type="button" th:onclick="'window.location.href = \'' + @{/participante/{id}(id=${participante.id})} + '\''" class="btn btn-primary btn-sm" th:value="Modificar"/>
-                        </td>
-                        <td>
-                            <input type="button" th:onclick="'window.location.href = \'' + @{/participante/eliminar/{id}(id=${participante.id})} + '\''" class="btn btn-primary btn-sm" th:value="Eliminar"/>
-                        </td>
-                    </tr>
-                </table>
-                <a th:href="@{/participante/nuevoParticipante}" th:text="Nuevo" />
+                        <tr th:each="participante, iStat: ${participantes}">
+                            <td />
+                            <td th:text="${participante.username}" />
+                            <td th:text="${participante.nombre}" />
+                            <td th:text="${participante.apellido}" />
+                            <td>
+                                <input type="button" th:onclick="'window.location.href = \'' + @{/participante/{id}(id=${participante.id})} + '\''" class="btn btn-primary btn-sm" th:value="Modificar"/>
+                            </td>
+                            <td>
+                                <input type="button" th:onclick="'window.location.href = \'' + @{/participante/eliminar/{id}(id=${participante.id})} + '\''" class="btn btn-primary btn-sm" th:value="Eliminar"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <a th:href="@{/participante/nuevoParticipante}" th:text="Nuevo" />
+                </div>
             </div>
         </div>
     </div>
-
 </body>
 </html>
