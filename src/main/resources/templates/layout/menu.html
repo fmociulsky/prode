@@ -36,7 +36,7 @@
             </div>
             <div class="navbar-nav mr-auto py-0 ml-auto d-none d-lg-flex col-sm-1" style="width: 100%; max-width: 300px;">
                 <form th:method="post" th:action="@{/logout}">
-                    <a href="Javascript:void(0)" onclick="parentNode.parentNode.submit()" class="nav-item nav-link">
+                    <a href="Javascript:void(0)" onclick="parentNode.submit()" class="nav-item nav-link">
                         <span class="header_hi" sec:authentication="name"></span>
                     </a>
                 </form>
