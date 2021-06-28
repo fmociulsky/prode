@@ -46,12 +46,12 @@
                                 <td></td>
                                 <td th:text="${pronostico.local}"/>
                                 <td>
-                                    <input th:if="${#authentication.principal.username} == ${part.usuario.username}" th:name="|pronosticos[${itemStat.index}].local.golesLocal|" th:field="*{pronosticos[__${itemStat.index}__].golesLocal}">
-                                    <span th:if="${#authentication.principal.username} != ${part.usuario.username}" th:text="*{pronosticos[__${itemStat.index}__].golesLocal}"></span>
+                                    <input th:if="${#authentication.principal.username == part.usuario.username and pronostico.editable}" th:name="|pronosticos[${itemStat.index}].local.golesLocal|" th:field="*{pronosticos[__${itemStat.index}__].golesLocal}">
+                                    <span th:if="${(#authentication.principal.username != part.usuario.username) or !pronostico.editable}" th:text="*{pronosticos[__${itemStat.index}__].golesLocal}"></span>
                                 </td>
                                 <td>
-                                    <input th:if="${#authentication.principal.username} == ${part.usuario.username}" th:name="|pronosticos[${itemStat.index}].local.golesVisitante|" th:field="*{pronosticos[__${itemStat.index}__].golesVisitante}">
-                                    <span th:if="${#authentication.principal.username} != ${part.usuario.username}" th:text="*{pronosticos[__${itemStat.index}__].golesVisitante}"></span>
+                                    <input th:if="${#authentication.principal.username == part.usuario.username and pronostico.editable}" th:name="|pronosticos[${itemStat.index}].local.golesVisitante|" th:field="*{pronosticos[__${itemStat.index}__].golesVisitante}">
+                                    <span th:if="${(#authentication.principal.username != part.usuario.username) or !pronostico.editable}" th:text="*{pronosticos[__${itemStat.index}__].golesVisitante}"></span>
                                 </td>
                                 <td th:text="${pronostico.visitante}"/>
                                 <td></td>

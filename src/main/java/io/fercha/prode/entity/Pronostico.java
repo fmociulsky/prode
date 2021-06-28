@@ -135,6 +135,10 @@ public class Pronostico implements Serializable {
         }else setPuntos(0);
     }
 
+    public Boolean getEditable(){
+        return getPartido().getEditable();
+    }
+
     private static int ACIERTO = 3;
     private static int PTOS_4 = 4;
     private static int PTOS_2 = 2;

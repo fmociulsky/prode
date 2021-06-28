@@ -2,6 +2,7 @@ package io.fercha.prode.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -31,8 +32,10 @@ public class Partido implements Serializable {
     private Date fecha;
     @NotNull
     private FaseEnum fase;
+    @Column(name = "editable", nullable = false, columnDefinition="tinyint(1) default 1")
+    private Boolean editable;
 
-    public Partido(Long id, Equipo local, Equipo visitante, int golesLocal, int golesVisitante, Date fecha, FaseEnum fase) {
+    public Partido(Long id, Equipo local, Equipo visitante, int golesLocal, int golesVisitante, Date fecha, FaseEnum fase, Boolean editable) {
         this.id = id;
         this.local = local;
         this.visitante = visitante;
@@ -40,6 +43,7 @@ public class Partido implements Serializable {
         this.golesVisitante = golesVisitante;
         this.fecha = fecha;
         this.fase = fase;
+        this.editable = editable;
     }
 
     public Partido() {
@@ -99,5 +103,13 @@ public class Partido implements Serializable {
 
     public void setFase(FaseEnum fase) {
         this.fase = fase;
+    }
+
+    public Boolean getEditable() {
+        return editable;
+    }
+
+    public void setEditable(Boolean editable) {
+        this.editable = editable;
     }
 }

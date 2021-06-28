@@ -43,7 +43,7 @@
                             </td>
                         </tr>
                     </table>
-                    <a th:href="@{/equipo/nuevoEquipo}" th:text="Nuevo" />
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/equipo/nuevoEquipo}" th:text="Nuevo" />
                 </div>
             </div>
         </div>

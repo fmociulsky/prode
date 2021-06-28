@@ -56,7 +56,7 @@
                             <td><input type="file" name="foto" accept="image/png, image/jpeg" /></td>
                         </tr>
                     </table>
-                    <input type="submit" name="guardar" value="Guardar" />
+                    <input sec:authorize="hasRole('ROLE_ADMIN')" type="submit" name="guardar" value="Guardar" />
                 </form>
             </div>
         </div>

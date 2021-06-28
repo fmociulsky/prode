@@ -27,8 +27,8 @@
                             <th>Username</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
-                            <th>Modificar</th>
-                            <th>Eliminar</th>
+                            <th sec:authorize="hasRole('ROLE_ADMIN')">Modificar</th>
+                            <th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
                         </tr>
                         </thead>
 
@@ -37,15 +37,15 @@
                             <td th:text="${participante.username}" />
                             <td th:text="${participante.nombre}" />
                             <td th:text="${participante.apellido}" />
-                            <td>
+                            <td sec:authorize="hasRole('ROLE_ADMIN')">
                                 <input type="button" th:onclick="'window.location.href = \'' + @{/participante/{id}(id=${participante.id})} + '\''" class="btn btn-primary btn-sm" th:value="Modificar"/>
                             </td>
-                            <td>
+                            <td sec:authorize="hasRole('ROLE_ADMIN')">
                                 <input type="button" th:onclick="'window.location.href = \'' + @{/participante/eliminar/{id}(id=${participante.id})} + '\''" class="btn btn-primary btn-sm" th:value="Eliminar"/>
                             </td>
                         </tr>
                     </table>
-                    <a th:href="@{/participante/nuevoParticipante}" th:text="Nuevo" />
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/participante/nuevoParticipante}" th:text="Nuevo" />
                 </div>
             </div>
         </div>
