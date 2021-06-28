@@ -25,7 +25,6 @@
                             <th>Posicion</th>
                             <th>Caripela</th>
                             <th>Nombre</th>
-                            <th>Apellido</th>
                             <th>Puntos</th>
                             <th>Detalle</th>
                         </tr>
@@ -34,8 +33,7 @@
                         <tr th:each="participante, iStat: ${participantes}">
                             <td th:text="${iStat.index} + 1" />
                             <td />
-                            <td th:text="${participante.nombre}" />
-                            <td th:text="${participante.apellido}" />
+                            <td th:text="${participante.nombre} + ' ' + ${participante.apellido}" />
                             <td th:text="${participante.puntos}"/>
                             <td/>
                         </tr>
