@@ -21,7 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Controller
@@ -39,7 +43,8 @@ public class PronosticoController {
 
 
     @GetMapping("/{username}")
-    public String listar(@PathVariable String username,  FaseEnum faseEnum, Model model, @AuthenticationPrincipal User user){
+    public String listar(ZoneId clientZoneId, @PathVariable String username, FaseEnum faseEnum, Model model, @AuthenticationPrincipal User user){
+        System.out.println("-------- Fecha y Hora de " + username + ": " + LocalDateTime.now(clientZoneId).toString()+ " -------------");
         final PronosticoForm pronosticoForm = new PronosticoForm();
         final List<Partido> partidos = partidoService.getPartidos(faseEnum);
         final Participante participante = participanteService.buscarPorUsuarioId(username);

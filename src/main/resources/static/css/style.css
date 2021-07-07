@@ -9668,3 +9668,13 @@ h6,
   padding: 0;
   list-style-type: none;
 }
+
+.table-main thead{
+    background-color: black;
+    color: white;
+}
+
+.table-main tbody{
+    background-color: #ffcc00;
+    color: black;
+}
