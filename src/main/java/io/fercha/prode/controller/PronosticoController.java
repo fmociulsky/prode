@@ -22,10 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 @Controller
@@ -43,8 +44,8 @@ public class PronosticoController {
 
 
     @GetMapping("/{username}")
-    public String listar(ZoneId clientZoneId, @PathVariable String username, FaseEnum faseEnum, Model model, @AuthenticationPrincipal User user){
-        System.out.println("-------- Fecha y Hora de " + username + ": " + LocalDateTime.now(clientZoneId).toString()+ " -------------");
+    public String listar(TimeZone timezone, Locale clientLocale, ZoneId clientZoneId, @PathVariable String username, FaseEnum faseEnum, Model model, @AuthenticationPrincipal User user){
+        System.out.println("-------- Fecha de " + username + ": " + Calendar.getInstance(timezone).getTime().toString());
         final PronosticoForm pronosticoForm = new PronosticoForm();
         final List<Partido> partidos = partidoService.getPartidos(faseEnum);
         final Participante participante = participanteService.buscarPorUsuarioId(username);
