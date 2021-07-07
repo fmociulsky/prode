@@ -45,7 +45,8 @@
                             <td th:text="${partido.golesVisitante}" />
                             <td th:text="${partido.visitante.nombre}" />
                             <td></td>
-                            <td th:text="${#dates.format(partido.fecha, 'dd-MM-yyyy')}"/>
+                            <td th:text="${#dates.format(#calendars.createForTimeZone(#calendars.year(partido.fecha), #calendars.month(partido.fecha), #calendars.day(partido.fecha), #calendars.hour(partido.fecha), #calendars.minute(partido.fecha),'PST'), 'dd-MMM-yyyy HH:mm')}"/>
+                            <!--td th:text="${#dates.format(partido.fecha, 'dd-MM-yyyy')}"/-->
                             <td th:if="${#request.getParameter('fase') == null}" th:text="${partido.fase.value}"/>
                             <td></td>
                             <td sec:authorize="hasRole('ROLE_ADMIN')">
